@@ -14,9 +14,3 @@ npm run dev
 # Build for production in the dist/ directory
 npm run build
 ```
-## Exercise notes
-
-- FOV: vertical height of the camera
-- Near & Far: how close and how far the camera can see
-- Do not use extreme value like 0.0001 and 99999 for near & far to prevent **z-fighting**
-- Controlling camera with `mousemove` event or OrbitControls
