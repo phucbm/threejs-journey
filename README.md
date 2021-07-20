@@ -50,7 +50,7 @@ https://threejs-journey.xyz/
 ### 09. Geometries
 
 - Vertices (coordinates)
-- `Float32Array`: to gain a better performance with custom geometries
+- Use `Float32Array`: to gain a better performance with custom geometries
 - `THREE.BufferGeometry()`
 
 ### 10. Debug UI
