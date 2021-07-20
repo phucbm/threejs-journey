@@ -1,5 +1,11 @@
-# three.js journey
-https://threejs-journey.xyz/
+# Three.j Journey - Lesson recap
+
+I created this repository as a lesson's notebook while learning Three.js from Three.js Journey, an awesome course by Bruno Simon.
+
+Please do not consider these as a whole (or part) of the lesson's content. 
+They are just things that I think I should write down to remember. 
+
+I also build a final result page for each lesson to quickly check my progress.
 
 ## Chapter 01 - Basics
 
@@ -12,6 +18,8 @@ https://threejs-journey.xyz/
 - A Camera needs an aspect ratio and an FOV (degree).
 - A Renderer need width/height, where to render into, a camera to see and a scene with every mesh's in it.
 
+👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/04/dist/)
+
 ### 05. Transform objects
 
 - Use Group to control multiple Mesh at once.
@@ -22,6 +30,8 @@ https://threejs-journey.xyz/
 - Use `AxesHelper` to show axes.
 - Use `camera.lookAt(position)` to set focus on a position.
 
+👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/05/dist/)
+
 ### 06. Animations
 
 - Use `requestAnimationFrame` to update value => create animations.
@@ -31,12 +41,16 @@ https://threejs-journey.xyz/
 - Workaround #3: use GSAP.
 - We can also use GSAP to perform the render process.
 
+👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/06/dist/)
+
 ### 07. Cameras
 
 - FOV: vertical height of the camera
 - Near & Far: how close and how far the camera can see
 - Do not use extreme value like 0.0001 and 99999 for near & far to prevent **z-fighting**
 - Controlling camera with `mousemove` event or OrbitControls
+
+👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/07/dist/)
 
 ### 08. Fullscreen and resizing
 
@@ -47,16 +61,22 @@ https://threejs-journey.xyz/
 - Pixel ratio: 2 is enough (retina), 3 is maximum.
 - Fullscreen mode: using `canvas.requestFullscreen()` and `document.exitFullscreen()`, safari need webkit prefix.
 
+👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/08/dist/)
+
 ### 09. Geometries
 
 - Vertices (coordinates)
 - Use `Float32Array`: to gain a better performance with custom geometries
 - `THREE.BufferGeometry()`
 
+👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/09/dist/)
+
 ### 10. Debug UI
 
 - dat.GUI [github](https://github.com/dataarts/dat.gui) [examples](https://jsfiddle.net/ikatyang/182ztwao/)
 - Each item in the debug panel is also called a "tweak"
+
+👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/10/dist/)
 
 ### 11. Textures
 ### 12. Materials
