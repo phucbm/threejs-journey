@@ -7,6 +7,8 @@ They are just things that I think I should write down to remember.
 
 I also build a final result page for each lesson to quickly check my progress.
 
+---
+
 ## Chapter 01 - Basics
 
 ### 04. Webpack
@@ -82,9 +84,13 @@ I also build a final result page for each lesson to quickly check my progress.
 ### 12. Materials
 ### 13. 3D Text
 
+---
+
 ## Chapter 02 - Classic techniques
 
 ### 14. Lights
+
+---
 
 ## Playground
 
@@ -93,8 +99,9 @@ I'm just pulling some crazy ideas out of my sweaty brain.
 
 ### The mess
 
-Things in this mess: `gsap`, `OrbitControls`, `object.geometry.setDrawRange()`, `THREE.BufferGeometry()`
+- Milestone: after lesson #10
+- Things in this mess: `gsap`, `OrbitControls`, `object.geometry.setDrawRange()`, `THREE.BufferGeometry()`
 
 ![thumbnail](/img/the-mess.gif)
 
-👉 [See it](https://phucbm.github.io/threejs-journey/playground/the-mess)
+👉 [See it](https://phucbm.github.io/threejs-journey/playground/the-mess/dist)
