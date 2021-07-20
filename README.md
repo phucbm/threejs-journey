@@ -54,6 +54,10 @@ https://threejs-journey.xyz/
 - `THREE.BufferGeometry()`
 
 ### 10. Debug UI
+
+- dat.GUI [github](https://github.com/dataarts/dat.gui) [examples](https://jsfiddle.net/ikatyang/182ztwao/)
+- Each item in the debug panel is also called a "tweak"
+
 ### 11. Textures
 ### 12. Materials
 ### 13. 3D Text
