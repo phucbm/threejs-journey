@@ -48,6 +48,11 @@ https://threejs-journey.xyz/
 - Fullscreen mode: using `canvas.requestFullscreen()` and `document.exitFullscreen()`, safari need webkit prefix.
 
 ### 09. Geometries
+
+- Vertices (coordinates)
+- `Float32Array`: to gain a better performance with custom geometries
+- `THREE.BufferGeometry()`
+
 ### 10. Debug UI
 ### 11. Textures
 ### 12. Materials
