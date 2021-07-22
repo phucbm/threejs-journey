@@ -81,6 +81,14 @@ I also build a final result page for each lesson to quickly check my progress.
 👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/10/dist/)
 
 ### 11. Textures
+
+- Load textures (images) using `THREE.TextureLoader()`
+- If texture could be changed after init, set `texture.needsUpdate` to `true`
+- Get UV coordinates at `geometry.attributes.uv`
+- Texture filter
+- Texture optimization
+- Texture resources: [poliigon.com](poliigon.com), [3dtextures.me](3dtextures.me), [arroway-textures.ch](arroway-textures.ch)
+
 ### 12. Materials
 ### 13. 3D Text
 
