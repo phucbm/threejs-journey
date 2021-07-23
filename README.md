@@ -90,6 +90,12 @@ I also build a final result page for each lesson to quickly check my progress.
 - Texture resources: [poliigon.com](poliigon.com), [3dtextures.me](3dtextures.me), [arroway-textures.ch](arroway-textures.ch)
 
 ### 12. Materials
+
+- `material.opacity`, `material.alphaMap` need `material.transparent = true`
+- `material.side = THREE.DoubleSide;` could slow down the performance
+- `THREE.MeshNormalMaterial()`, `flatShading`
+- `THREE.MeshStandardMaterial()`, `aoMap`, `uv2`
+
 ### 13. 3D Text
 
 ---
