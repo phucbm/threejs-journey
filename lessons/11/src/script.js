@@ -13,7 +13,7 @@ image.onload = () => {
     // tells Threejs this texture will be updated later
     texture.needsUpdate = true;
 };
-image.src = '/textures/door/color.jpg';*/
+image.src = 'textures/door/color.jpg';*/
 
 const loadingManager = new THREE.LoadingManager();
 /*loadingManager.onLoad = (data) => {
@@ -27,13 +27,13 @@ loadingManager.onError = (data) => {
 };*/
 
 const textureLoader = new THREE.TextureLoader(loadingManager);
-const colorTexture = textureLoader.load('/textures/minecraft.png');
-const alphaTexture = textureLoader.load('/textures/door/alpha.jpg');
-const heightTexture = textureLoader.load('/textures/door/height.jpg');
-const normalTexture = textureLoader.load('/textures/door/normal.jpg');
-const ambientOcclusionTexture = textureLoader.load('/textures/door/ambientOcclusion.jpg');
-const metalnessTexture = textureLoader.load('/textures/door/metalness.jpg');
-const roughnessTexture = textureLoader.load('/textures/door/roughness.jpg');
+const colorTexture = textureLoader.load('textures/minecraft.png');
+const alphaTexture = textureLoader.load('textures/door/alpha.jpg');
+const heightTexture = textureLoader.load('textures/door/height.jpg');
+const normalTexture = textureLoader.load('textures/door/normal.jpg');
+const ambientOcclusionTexture = textureLoader.load('textures/door/ambientOcclusion.jpg');
+const metalnessTexture = textureLoader.load('textures/door/metalness.jpg');
+const roughnessTexture = textureLoader.load('textures/door/roughness.jpg');
 
 /*colorTexture.repeat.x = 2;
 colorTexture.repeat.y = 3;
