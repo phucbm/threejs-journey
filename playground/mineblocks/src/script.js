@@ -409,7 +409,7 @@ const timeline = gsap.timeline({
     step = Math.PI * 2 / blockTextures.length;
 
 for (let i = 0; i < blockTextures.length; i++) {
-    timeline.to([group.rotation, groupText.rotation, groupDescription.rotation], {x: (i + .5) * step}/*, ">+=2"*/);
+    timeline.to([group.rotation, groupText.rotation, groupDescription.rotation], {x: (i + 1) * step}/*, ">+=2"*/);
 }
 
 timeline.timeScale(1.2)
