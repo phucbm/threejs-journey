@@ -1,13 +1,28 @@
-# Three.js Journey - Lesson recap
+# Three.js Journey
 
-I created this repository as a lesson's notebook while learning Three.js from Three.js Journey, an awesome course by Bruno Simon.
+## Playground
 
-Please do not consider these as a whole (or part) of the lesson's content. 
-They are just things that I think I should write down to remember. 
+Just pulling some crazy ideas out of my sweaty brain.
 
-I also build a final result page for each lesson to quickly check my progress.
+### The mess
+
+- Milestone: lesson #10
+- Things in this mess: `gsap`, `OrbitControls`, `object.geometry.setDrawRange()`, `THREE.BufferGeometry()`
+
+![thumbnail](/img/the-mess.gif)
+
+👉 [See it](https://phucbm.github.io/threejs-journey/playground/the-mess/dist)
+
+### Minecraft Blocks
+
+- Milestone: lesson #13
+- Keywords: `gsap/ScrollTrigger`, `THREE.FontLoader()`, `THREE.TextGeometry()`, `THREE.MeshBasicMaterial()`, `THREE.TextureLoader()`
+
+👉 [See it](https://phucbm.github.io/threejs-journey/playground/mineblocks/dist)
 
 ---
+
+Lesson recap and exercises.
 
 ## Chapter 01 - Basics
 
@@ -114,19 +129,3 @@ I also build a final result page for each lesson to quickly check my progress.
 ## Chapter 02 - Classic techniques
 
 ### 14. Lights
-
----
-
-## Playground
-
-This is not a part of the course.
-I'm just pulling some crazy ideas out of my sweaty brain.
-
-### The mess
-
-- Milestone: after lesson #10
-- Things in this mess: `gsap`, `OrbitControls`, `object.geometry.setDrawRange()`, `THREE.BufferGeometry()`
-
-![thumbnail](/img/the-mess.gif)
-
-👉 [See it](https://phucbm.github.io/threejs-journey/playground/the-mess/dist)
