@@ -89,6 +89,8 @@ I also build a final result page for each lesson to quickly check my progress.
 - Texture optimization
 - Texture resources: [poliigon.com](poliigon.com), [3dtextures.me](3dtextures.me), [arroway-textures.ch](arroway-textures.ch)
 
+👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/11/dist/)
+
 ### 12. Materials
 
 - `material.opacity`, `material.alphaMap` need `material.transparent = true`
@@ -96,7 +98,16 @@ I also build a final result page for each lesson to quickly check my progress.
 - `THREE.MeshNormalMaterial()`, `flatShading`
 - `THREE.MeshStandardMaterial()`, `aoMap`, `uv2`
 
+👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/12/dist/)
+
 ### 13. 3D Text
+
+- `THREE.FontLoader()`, convert font face to json with [Facetype.js](http://gero3.github.io/facetype.js/)
+- `THREE.TextGeometry`, `textGeometry.center()`
+- [Matcaps repository](https://github.com/nidorx/matcaps)
+- `console.time()` and `console.timeEnd()`
+
+👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/13/dist/)
 
 ---
 
