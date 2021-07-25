@@ -13,10 +13,12 @@ Just pulling some crazy ideas out of my sweaty brain.
 
 👉 [See it](https://phucbm.github.io/threejs-journey/playground/the-mess/dist)
 
-### Minecraft Blocks
+### Infinite Minecraft Blocks
 
 - Milestone: lesson #13
 - Keywords: `gsap/ScrollTrigger`, `THREE.FontLoader()`, `THREE.TextGeometry()`, `THREE.MeshBasicMaterial()`, `THREE.TextureLoader()`
+
+![thumbnail](/img/mineblocks.gif)
 
 👉 [See it](https://phucbm.github.io/threejs-journey/playground/mineblocks/dist)
 
