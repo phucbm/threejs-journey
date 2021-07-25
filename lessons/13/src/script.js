@@ -25,7 +25,7 @@ const axesHelper = new THREE.AxesHelper();
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
-const matcapTexture = textureLoader.load('/textures/matcaps/5.png');
+const matcapTexture = textureLoader.load('textures/matcaps/5.png');
 
 
 /**
@@ -33,7 +33,7 @@ const matcapTexture = textureLoader.load('/textures/matcaps/5.png');
  */
 const fontLoader = new THREE.FontLoader();
 fontLoader.load(
-    '/fonts/pirata-one-regular.json',
+    'fonts/pirata-one-regular.json',
     (font) => {
         //console.log('font loaded')
         const textGeometry = new THREE.TextGeometry(
