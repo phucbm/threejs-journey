@@ -131,3 +131,9 @@ Lesson recap and exercises.
 ## Chapter 02 - Classic techniques
 
 ### 14. Lights
+
+- Lights
+- Bake: create lights from textures
+- Light helpers, rectAreaLightHelper is not a part of THREE
+
+👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/14/dist/)
