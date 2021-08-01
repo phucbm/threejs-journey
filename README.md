@@ -137,3 +137,10 @@ Lesson recap and exercises.
 - Light helpers, rectAreaLightHelper is not a part of THREE
 
 👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/14/dist/)
+
+### 15. Shadows
+
+- Lights that support shadows: PointLight, DirectionalLight, SpotLight
+- Baking shadow: use textures to simulate the shadows, but shadows created by this way will be static
+
+👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/15/dist/)
