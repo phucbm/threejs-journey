@@ -144,3 +144,7 @@ Lesson recap and exercises.
 - Baking shadow: use textures to simulate the shadows, but shadows created by this way will be static
 
 👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/15/dist/)
+
+### 15. The haunted house
+
+👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/16/dist/)
