@@ -154,3 +154,9 @@ Lesson recap and exercises.
 - `THREE.PointsMaterial()`, `THREE.Points()`
 
 👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/17/dist/)
+
+### 18. Galaxy Generator
+
+- `geometry.dispose()`, `material.dispose()`, `scene.remove(mesh)`
+
+👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/18/dist/)
