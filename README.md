@@ -145,6 +145,12 @@ Lesson recap and exercises.
 
 👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/15/dist/)
 
-### 15. The haunted house
+### 16. The haunted house
 
 👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/16/dist/)
+
+### 17. Particles
+
+- `THREE.PointsMaterial()`, `THREE.Points()`
+
+👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/17/dist/)
