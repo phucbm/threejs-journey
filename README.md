@@ -160,3 +160,9 @@ Lesson recap and exercises.
 - `geometry.dispose()`, `material.dispose()`, `scene.remove(mesh)`
 
 👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/18/dist/)
+
+### 19. Raycaster
+
+- `THREE.Raycaster()`: create hover, click events
+
+👉 [See final result](https://phucbm.github.io/threejs-journey/lessons/19/dist/)
