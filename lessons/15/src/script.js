@@ -8,8 +8,8 @@ import * as dat from 'dat.gui'
  * Textures
  */
 const textLoader = new THREE.TextureLoader()
-const bakedShadow = textLoader.load('/textures/bakedShadow.jpg');
-const simpleShadow = textLoader.load('/textures/simpleShadow.jpg');
+const bakedShadow = textLoader.load('textures/bakedShadow.jpg');
+const simpleShadow = textLoader.load('textures/simpleShadow.jpg');
 
 
 /**

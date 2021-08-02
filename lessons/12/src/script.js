@@ -15,26 +15,26 @@ const gui = new dat.GUI();
 const textureLoader = new THREE.TextureLoader()
 const cubeTextureLoader = new THREE.CubeTextureLoader()
 
-const doorColorTexture = textureLoader.load('/textures/door/color.jpg')
-const doorAlphaTexture = textureLoader.load('/textures/door/alpha.jpg')
-const doorAmbientOcclusionTexture = textureLoader.load('/textures/door/ambientOcclusion.jpg')
-const doorHeightTexture = textureLoader.load('/textures/door/height.jpg')
-const doorNormalTexture = textureLoader.load('/textures/door/normal.jpg')
-const doorMetalnessTexture = textureLoader.load('/textures/door/metalness.jpg')
-const doorRoughnessTexture = textureLoader.load('/textures/door/roughness.jpg')
-const matcapTexture = textureLoader.load('/textures/matcaps/3.png')
-const gradientTexture = textureLoader.load('/textures/gradients/3.jpg')
+const doorColorTexture = textureLoader.load('textures/door/color.jpg')
+const doorAlphaTexture = textureLoader.load('textures/door/alpha.jpg')
+const doorAmbientOcclusionTexture = textureLoader.load('textures/door/ambientOcclusion.jpg')
+const doorHeightTexture = textureLoader.load('textures/door/height.jpg')
+const doorNormalTexture = textureLoader.load('textures/door/normal.jpg')
+const doorMetalnessTexture = textureLoader.load('textures/door/metalness.jpg')
+const doorRoughnessTexture = textureLoader.load('textures/door/roughness.jpg')
+const matcapTexture = textureLoader.load('textures/matcaps/3.png')
+const gradientTexture = textureLoader.load('textures/gradients/3.jpg')
 gradientTexture.minFilter = THREE.NearestFilter;
 gradientTexture.magFilter = THREE.NearestFilter;
 gradientTexture.generateMipmaps = false;
 
 const environmentMapTexture = cubeTextureLoader.load([
-    '/textures/environmentMaps/1/px.jpg',
-    '/textures/environmentMaps/1/nx.jpg',
-    '/textures/environmentMaps/1/py.jpg',
-    '/textures/environmentMaps/1/ny.jpg',
-    '/textures/environmentMaps/1/pz.jpg',
-    '/textures/environmentMaps/1/nz.jpg',
+    'textures/environmentMaps/1/px.jpg',
+    'textures/environmentMaps/1/nx.jpg',
+    'textures/environmentMaps/1/py.jpg',
+    'textures/environmentMaps/1/ny.jpg',
+    'textures/environmentMaps/1/pz.jpg',
+    'textures/environmentMaps/1/nz.jpg',
 ]);
 
 /**
