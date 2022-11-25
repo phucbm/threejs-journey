@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  overflow: hidden;
+}
+
+#__nuxt {
+  min-height: 100vh;
+  gap: 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+//.webgl {
+//  position: fixed;
+//  top: 0;
+//  left: 0;
+//  outline: none;
+//}
