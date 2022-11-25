@@ -11,6 +11,8 @@
     "nuxt": "3.0.0"
   },
   "dependencies": {
+    "dat-gui-vue": "^1.0.2",
+    "dat.gui": "^0.7.9",
     "gsap": "^3.11.3",
     "three": "^0.130.0"
   }
