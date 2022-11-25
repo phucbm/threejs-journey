@@ -6,10 +6,11 @@
 html,
 body {
   overflow: hidden;
+  min-height: 100vh;
 }
 
 #__nuxt {
-  min-height: 100vh;
+  height: 100%;
   gap: 5vw;
   display: flex;
   align-items: center;
