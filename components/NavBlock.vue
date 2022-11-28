@@ -15,8 +15,8 @@ let isVisible = ref(true);
       <NuxtLink :to="{name:'index'}" class="fw-bold">ThreeJS Journey</NuxtLink>
     </div>
 
-    <ul class="d-flex">
-      <li v-for="route in menuItems">
+    <ul class="d-flex fw-wrap">
+      <li v-for="route in menuItems" class="d-flex">
         <NuxtLink :to="route.path">{{ route.name }}</NuxtLink>
       </li>
     </ul>
@@ -38,6 +38,7 @@ let isVisible = ref(true);
   left:10px; right:10px; bottom:10px;
   border-radius:12px 0 12px 12px;
   box-shadow:0 0 5px rgba(0, 0, 0, .4);
+  gap:15px 20px;
 }
 .nav:not(.visible) {
   transform:translateY(calc(100% + 10px));
@@ -45,9 +46,13 @@ let isVisible = ref(true);
 
 .nav ul {
   list-style:none;
-  gap:20px;
+  gap:5px 10px;
 }
-.nav a {color:#fff;}
+.nav a {color:#fff; padding:3px 5px; border-radius:5px;}
+.nav a.router-link-active {
+  background:#fff;
+  color:#000;
+}
 
 .menu-toggle {
   box-shadow:0 0 5px rgba(0, 0, 0, .2);

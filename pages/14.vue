@@ -3,6 +3,16 @@ import * as THREE from 'three';
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 //import * as dat from 'dat.gui' todo: import dat.gui
 
+const route = useRoute();
+useHead({
+  title: route.name,
+  meta: [
+    //{name: 'description', content: ''},
+    //{property: 'og:description', content: ''},
+    //{property: 'og:image', content: ''},
+  ]
+});
+
 const canvasRef = ref(null);
 
 onMounted(() => {
