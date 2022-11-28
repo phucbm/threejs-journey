@@ -5,8 +5,7 @@ import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
 const canvasRef = ref(null);
-
-onMounted(() => {
+const fn = () => {
   const canvas = canvasRef.value;
 
   gsap.registerPlugin(ScrollTrigger);
@@ -436,6 +435,14 @@ Drops: Ender gem and Experience
   };
 // https://greensock.com/docs/v3/GSAP/gsap.ticker
   gsap.ticker.add(render);
+}
+
+onMounted(fn);
+
+useHead({
+  bodyAttrs: {
+    class: 'mineblocks'
+  },
 });
 </script>
 
@@ -444,7 +451,8 @@ Drops: Ender gem and Experience
   <canvas ref="canvasRef"></canvas>
 </template>
 
-
 <style>
-body {height:1500vh; overflow:visible;}
+html {overflow:auto;}
+body.mineblocks {height:1500vh; overflow:auto;}
+body.mineblocks #__nuxt {position:fixed; top:0; left:0;}
 </style>
