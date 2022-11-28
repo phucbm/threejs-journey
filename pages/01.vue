@@ -37,5 +37,7 @@ onMounted(() => {
 
 
 <template>
-  <canvas class="webgl" ref="canvasRef"></canvas>
+  <div>
+    <canvas ref="canvasRef"></canvas>
+  </div>
 </template>

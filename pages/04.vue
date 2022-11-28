@@ -102,6 +102,8 @@ onMounted(() => {
 
 
 <template>
-  <canvas ref="canvasRef"></canvas>
-  <canvas ref="canvasRef2"></canvas>
+  <div>
+    <canvas ref="canvasRef"></canvas>
+    <canvas ref="canvasRef2"></canvas>
+  </div>
 </template>

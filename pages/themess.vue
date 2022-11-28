@@ -3,6 +3,16 @@ import * as THREE from 'three';
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import gsap from "gsap";
 
+
+useHead({
+  title: 'The Mess',
+  meta: [
+    //{name: 'description', content: ''},
+    //{property: 'og:description', content: ''},
+    //{property: 'og:image', content: ''},
+  ]
+});
+
 const canvasRef = ref(null);
 const fn = () => {
   const canvas = canvasRef.value;
@@ -165,7 +175,8 @@ const fn = () => {
 onMounted(fn);
 </script>
 
-
 <template>
-  <canvas ref="canvasRef"></canvas>
+  <div>
+    <canvas ref="canvasRef"></canvas>
+  </div>
 </template>
