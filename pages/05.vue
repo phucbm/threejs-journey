@@ -7,7 +7,7 @@ definePageMeta({title: `Fullscreen and resizing`});
 
 const route = useRoute();
 useHead({
-  title: route.name,
+  title: route.meta.title,
   meta: [
     //{name: 'description', content: ''},
     //{property: 'og:description', content: ''},

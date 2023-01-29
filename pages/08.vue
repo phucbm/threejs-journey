@@ -1,12 +1,12 @@
 <script setup>
 import * as THREE from 'three';
-import gsap from "gsap";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
-//import * as dat from 'dat.gui';
+
+definePageMeta({title: `Textures`});
 
 const route = useRoute();
 useHead({
-  title: route.name,
+  title: route.meta.title,
   meta: [
     //{name: 'description', content: ''},
     //{property: 'og:description', content: ''},
@@ -17,22 +17,49 @@ useHead({
 const canvasRef = ref(null);
 
 onMounted(() => {
-  if(process.server) return;
-
   const canvas = canvasRef.value;
 
   /**
-   * Debug
+   * Textures
    */
-  const parameters = {
-    color: '#f00',
-    spin: () => {
-      gsap.fromTo(mesh.rotation, {y: 0}, {y: 10, duration: 2})
-      gsap.fromTo(mesh.rotation, {x: 0}, {x: 10, duration: 2})
-      gsap.fromTo(mesh.rotation, {z: 0}, {z: 10, duration: 2})
-    }
-  }
+  /*
+  // native js way
+  const image = new Image();
+  const texture = new THREE.Texture(image);
+  image.onload = () => {
+      // tells Threejs this texture will be updated later
+      texture.needsUpdate = true;
+  };
+  image.src = 'textures/door/color.jpg';*/
 
+  const loadingManager = new THREE.LoadingManager();
+  /*loadingManager.onLoad = (data) => {
+      console.log('load', data)
+  };
+  loadingManager.onProgress = (data) => {
+      console.log('progress', data)
+  };
+  loadingManager.onError = (data) => {
+      console.log('error', data)
+  };*/
+
+  const textureLoader = new THREE.TextureLoader(loadingManager);
+  const colorTexture = textureLoader.load('/textures/minecraft.png');
+  const alphaTexture = textureLoader.load('/textures/door/alpha.jpg');
+  const heightTexture = textureLoader.load('/textures/door/height.jpg');
+  const normalTexture = textureLoader.load('/textures/door/normal.jpg');
+  const ambientOcclusionTexture = textureLoader.load('/textures/door/ambientOcclusion.jpg');
+  const metalnessTexture = textureLoader.load('/textures/door/metalness.jpg');
+  const roughnessTexture = textureLoader.load('/textures/door/roughness.jpg');
+
+  /*colorTexture.repeat.x = 2;
+  colorTexture.repeat.y = 3;
+  colorTexture.wrapS = THREE.RepeatWrapping;
+  colorTexture.wrapT = THREE.RepeatWrapping;*/
+
+  colorTexture.generateMipmaps = false;
+  colorTexture.minFilter = THREE.NearestFilter;
+  colorTexture.magFilter = THREE.NearestFilter;
 
   /**
    * Base
@@ -45,30 +72,11 @@ onMounted(() => {
    * Object
    */
   const geometry = new THREE.BoxGeometry(1, 1, 1)
-  const material = new THREE.MeshBasicMaterial({color: 0xff0000})
+//console.log(geometry.attributes.uv)
+
+  const material = new THREE.MeshBasicMaterial({map: colorTexture})
   const mesh = new THREE.Mesh(geometry, material)
   scene.add(mesh)
-
-// Debug todo: import dat.gui
-//   let dat = require('dat.gui')
-//   const gui = new dat.GUI();
-//   gui.add(mesh.position, 'x', -3, 3, .01);
-//   gui.add(mesh.position, 'y')
-//       .min(-3)
-//       .max(3)
-//       .name('elevation')
-//       .step(.01)
-//
-//   gui.add(mesh, 'visible')
-//
-//   gui.add(material, 'wireframe')
-//
-//   gui.addColor(parameters, 'color')
-//       .onChange(() => {
-//         material.color.set(parameters.color)
-//       })
-//
-//   gui.add(parameters, 'spin')
 
   /**
    * Sizes
@@ -97,7 +105,9 @@ onMounted(() => {
    */
 // Base camera
   const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-  camera.position.z = 3
+  camera.position.x = 1
+  camera.position.y = 1
+  camera.position.z = 1
   scene.add(camera)
 
 // Controls
@@ -134,6 +144,7 @@ onMounted(() => {
   tick()
 });
 </script>
+
 
 <template>
   <div>

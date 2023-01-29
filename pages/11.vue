@@ -1,10 +1,13 @@
 <script setup>
 import * as THREE from 'three';
+import {RectAreaLightHelper} from "three/examples/jsm/helpers/RectAreaLightHelper";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+
+definePageMeta({title: `Lights`});
 
 const route = useRoute();
 useHead({
-  title: route.name,
+  title: route.meta.title,
   meta: [
     //{name: 'description', content: ''},
     //{property: 'og:description', content: ''},
@@ -17,7 +20,6 @@ const canvasRef = ref(null);
 onMounted(() => {
   const canvas = canvasRef.value;
 
-
   /**
    * Base
    */
@@ -25,77 +27,84 @@ onMounted(() => {
 // Scene
   const scene = new THREE.Scene()
 
-// Axes helper
-  const axesHelper = new THREE.AxesHelper();
-//scene.add(axesHelper);
+  /**
+   * Lights
+   */
+  const ambientLight = new THREE.AmbientLight('#fff', .5);
+  scene.add(ambientLight);
+
+  const directionalLight = new THREE.DirectionalLight(0x00fffc, .3);
+  directionalLight.position.set(1, .25, 0);
+  scene.add(directionalLight);
+
+  const hemisphereLight = new THREE.HemisphereLight(0xff0000, 0x0000ff, .3);
+  scene.add(hemisphereLight);
+
+  const pointLight = new THREE.PointLight(0xff9000, .5, 10, 2);
+  pointLight.position.set(1, -.5, 1);
+  scene.add(pointLight);
+
+// only works with meshStandard and meshPhysic
+  const rectAreaLight = new THREE.RectAreaLight(0x4e00ff, 2, 3, 3)
+  rectAreaLight.position.set(-1.5, 0, 1.5);
+  rectAreaLight.lookAt(new THREE.Vector3());
+  scene.add(rectAreaLight)
+
+  const spotLight = new THREE.SpotLight(0x78ff00, .5, 7, Math.PI * .1, .25, 1)
+  spotLight.position.set(0, 2, 3);
+  scene.add(spotLight);
+
+// bake: create lights using texture
+
+// Helpers
+  const hemisphereLightHelper = new THREE.HemisphereLightHelper(hemisphereLight, .1)
+  scene.add(hemisphereLightHelper)
+
+  const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight, .1)
+  scene.add(directionalLightHelper)
+
+  const pointLightHelper = new THREE.PointLightHelper(pointLight, .2)
+  scene.add(pointLightHelper)
+
+  const spotLightHelper = new THREE.SpotLightHelper(spotLight)
+  scene.add(spotLightHelper)
+
+  const rectAreaLightHelper = new RectAreaLightHelper(rectAreaLight)
+  scene.add(rectAreaLightHelper)
 
   /**
-   * Textures
+   * Objects
    */
-  const textureLoader = new THREE.TextureLoader()
-  const matcapTexture = textureLoader.load('/textures/matcaps/5.png');
+// Material
+  const material = new THREE.MeshStandardMaterial()
+  material.roughness = 0.4
 
+// Objects
+  const sphere = new THREE.Mesh(
+      new THREE.SphereGeometry(0.5, 32, 32),
+      material
+  )
+  sphere.position.x = -1.5
 
-  /**
-   * Fonts
-   */
-  const fontLoader = new THREE.FontLoader();
-  fontLoader.load(
-      '/fonts/pirata-one-regular.json',
-      (font) => {
-        //console.log('font loaded')
-        const textGeometry = new THREE.TextGeometry(
-            'Hello Simon', {
-              font: font,
-              size: .5,
-              height: .2,
-              curveSegments: 6,
-              bevelEnabled: true,
-              bevelThickness: .03,
-              bevelSize: .02,
-              bevelOffset: 0,
-              bevelSegments: 4
-            }
-        );
+  const cube = new THREE.Mesh(
+      new THREE.BoxGeometry(0.75, 0.75, 0.75),
+      material
+  )
 
-        //textGeometry.computeBoundingBox();
-        //console.log(textGeometry.boundingBox)
-        /*textGeometry.translate(
-            -textGeometry.boundingBox.max.x * .5,
-            -textGeometry.boundingBox.max.y * .5,
-            -textGeometry.boundingBox.max.z * .5,
-        );*/
+  const torus = new THREE.Mesh(
+      new THREE.TorusGeometry(0.3, 0.2, 32, 64),
+      material
+  )
+  torus.position.x = 1.5
 
-        textGeometry.center();
+  const plane = new THREE.Mesh(
+      new THREE.PlaneGeometry(5, 5),
+      material
+  )
+  plane.rotation.x = -Math.PI * 0.5
+  plane.position.y = -0.65
 
-        const material = new THREE.MeshMatcapMaterial({matcap: matcapTexture});
-        const text = new THREE.Mesh(textGeometry, material);
-        scene.add(text);
-
-        //console.time('donuts');
-
-        const donutGeometry = new THREE.TorusBufferGeometry(.3, .2, 20, 45);
-
-        for(let i = 0; i < 100; i++){
-          const donut = new THREE.Mesh(donutGeometry, material);
-
-          donut.position.x = (Math.random() - .5) * 10;
-          donut.position.y = (Math.random() - .5) * 10;
-          donut.position.z = (Math.random() - .5) * 10;
-
-          donut.rotation.x = Math.random() * Math.PI;
-          donut.rotation.y = Math.random() * Math.PI;
-
-          const scale = Math.random();
-          donut.scale.set(scale, scale, scale);
-
-          scene.add(donut);
-        }
-
-        //console.timeEnd('donuts');
-      }
-  );
-
+  scene.add(sphere, cube, torus, plane)
 
   /**
    * Sizes
@@ -149,6 +158,15 @@ onMounted(() => {
 
   const tick = () => {
     const elapsedTime = clock.getElapsedTime()
+
+    // Update objects
+    sphere.rotation.y = 0.1 * elapsedTime
+    cube.rotation.y = 0.1 * elapsedTime
+    torus.rotation.y = 0.1 * elapsedTime
+
+    sphere.rotation.x = 0.15 * elapsedTime
+    cube.rotation.x = 0.15 * elapsedTime
+    torus.rotation.x = 0.15 * elapsedTime
 
     // Update controls
     controls.update()

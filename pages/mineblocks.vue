@@ -4,9 +4,11 @@ import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
+definePageMeta({title: `Infinite Minecraft Blocks`});
+
 const route = useRoute();
 useHead({
-  title: route.name,
+  title: route.meta.title,
   meta: [
     //{name: 'description', content: ''},
     //{property: 'og:description', content: ''},

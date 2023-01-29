@@ -1,10 +1,8 @@
 <script setup>
 import * as THREE from 'three';
-import gsap from "gsap";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
-definePageMeta({title: `Debug UI`});
-//import * as dat from 'dat.gui';
+definePageMeta({title: `Geometries`});
 
 const route = useRoute();
 useHead({
@@ -16,6 +14,7 @@ useHead({
   ]
 });
 
+
 const canvasRef = ref(null);
 
 onMounted(() => {
@@ -24,57 +23,34 @@ onMounted(() => {
   const canvas = canvasRef.value;
 
   /**
-   * Debug
-   */
-  const parameters = {
-    color: '#f00',
-    spin: () => {
-      gsap.fromTo(mesh.rotation, {y: 0}, {y: 10, duration: 2})
-      gsap.fromTo(mesh.rotation, {x: 0}, {x: 10, duration: 2})
-      gsap.fromTo(mesh.rotation, {z: 0}, {z: 10, duration: 2})
-    }
-  }
-
-
-  /**
    * Base
    */
 
 // Scene
   const scene = new THREE.Scene()
 
-  /**
-   * Object
-   */
-  const geometry = new THREE.BoxGeometry(1, 1, 1)
-  const material = new THREE.MeshBasicMaterial({color: 0xff0000})
+// Object
+//const geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2)
+
+  const count = 500;
+  const positionsArray = new Float32Array(count * 3 * 3);
+
+  for(let i = 0; i < count * 3 * 3; i++){
+    positionsArray[i] = (Math.random() - .5) * 3;
+  }
+
+  const positionsAttribute = new THREE.BufferAttribute(positionsArray, 3);
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', positionsAttribute);
+
+  const material = new THREE.MeshBasicMaterial({
+    color: 0xff0000,
+    wireframe: true
+  })
   const mesh = new THREE.Mesh(geometry, material)
   scene.add(mesh)
 
-// Debug todo: import dat.gui
-//   let dat = require('dat.gui')
-//   const gui = new dat.GUI();
-//   gui.add(mesh.position, 'x', -3, 3, .01);
-//   gui.add(mesh.position, 'y')
-//       .min(-3)
-//       .max(3)
-//       .name('elevation')
-//       .step(.01)
-//
-//   gui.add(mesh, 'visible')
-//
-//   gui.add(material, 'wireframe')
-//
-//   gui.addColor(parameters, 'color')
-//       .onChange(() => {
-//         material.color.set(parameters.color)
-//       })
-//
-//   gui.add(parameters, 'spin')
-
-  /**
-   * Sizes
-   */
+// Sizes
   const sizes = {
     width: window.innerWidth,
     height: window.innerHeight
@@ -94,10 +70,7 @@ onMounted(() => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
   })
 
-  /**
-   * Camera
-   */
-// Base camera
+// Camera
   const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
   camera.position.z = 3
   scene.add(camera)
@@ -106,18 +79,14 @@ onMounted(() => {
   const controls = new OrbitControls(camera, canvas)
   controls.enableDamping = true
 
-  /**
-   * Renderer
-   */
+// Renderer
   const renderer = new THREE.WebGLRenderer({
     canvas: canvas
   })
   renderer.setSize(sizes.width, sizes.height)
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-  /**
-   * Animate
-   */
+// Animate
   const clock = new THREE.Clock()
 
   const tick = () => {
@@ -136,6 +105,7 @@ onMounted(() => {
   tick()
 });
 </script>
+
 
 <template>
   <div>

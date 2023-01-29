@@ -110,7 +110,7 @@ Lesson recap and exercises.
 
 - `THREE.PointsMaterial()`, `THREE.Points()`
 
-### 15. Galaxy Generator
+### 15. Galaxy generator
 
 - `geometry.dispose()`, `material.dispose()`, `scene.remove(mesh)`
 

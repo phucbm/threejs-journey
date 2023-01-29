@@ -1,11 +1,12 @@
 <script setup>
 import * as THREE from 'three';
-//import * as dat from "dat.gui"; todo: import dat.gui
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+
+definePageMeta({title: `3D Text`});
 
 const route = useRoute();
 useHead({
-  title: route.name,
+  title: route.meta.title,
   meta: [
     //{name: 'description', content: ''},
     //{property: 'og:description', content: ''},
@@ -18,39 +19,6 @@ const canvasRef = ref(null);
 onMounted(() => {
   const canvas = canvasRef.value;
 
-  /**
-   * Debug
-   */
-  //const gui = new dat.GUI();
-
-
-  /**
-   * Textures
-   */
-  const textureLoader = new THREE.TextureLoader()
-  const cubeTextureLoader = new THREE.CubeTextureLoader()
-
-  const doorColorTexture = textureLoader.load('/textures/door/color.jpg')
-  const doorAlphaTexture = textureLoader.load('/textures/door/alpha.jpg')
-  const doorAmbientOcclusionTexture = textureLoader.load('/textures/door/ambientOcclusion.jpg')
-  const doorHeightTexture = textureLoader.load('/textures/door/height.jpg')
-  const doorNormalTexture = textureLoader.load('/textures/door/normal.jpg')
-  const doorMetalnessTexture = textureLoader.load('/textures/door/metalness.jpg')
-  const doorRoughnessTexture = textureLoader.load('/textures/door/roughness.jpg')
-  const matcapTexture = textureLoader.load('/textures/matcaps/3.png')
-  const gradientTexture = textureLoader.load('/textures/gradients/3.jpg')
-  gradientTexture.minFilter = THREE.NearestFilter;
-  gradientTexture.magFilter = THREE.NearestFilter;
-  gradientTexture.generateMipmaps = false;
-
-  const environmentMapTexture = cubeTextureLoader.load([
-    '/textures/environmentMaps/1/px.jpg',
-    '/textures/environmentMaps/1/nx.jpg',
-    '/textures/environmentMaps/1/py.jpg',
-    '/textures/environmentMaps/1/ny.jpg',
-    '/textures/environmentMaps/1/pz.jpg',
-    '/textures/environmentMaps/1/nz.jpg',
-  ]);
 
   /**
    * Base
@@ -59,104 +27,76 @@ onMounted(() => {
 // Scene
   const scene = new THREE.Scene()
 
+// Axes helper
+  const axesHelper = new THREE.AxesHelper();
+//scene.add(axesHelper);
 
   /**
-   * Objects
+   * Textures
    */
-  /*const material = new THREE.MeshBasicMaterial();
-  material.map = doorColorTexture;
-  material.transparent = true;
-  material.alphaMap = doorAlphaTexture; // kind of mask
-  material.side = THREE.DoubleSide; // low performance*/
-
-// direction of the outside of the object: lighting, reflection, refraction, etc.
-  /*const material = new THREE.MeshNormalMaterial();
-  material.flatShading = true;*/
-
-// use image to simulate the lights, shadows
-  /*const material = new THREE.MeshMatcapMaterial();
-  material.matcap = matcapTexture;*/
-
-// further get darker, closer get lighter
-//const material = new THREE.MeshDepthMaterial();
-
-// reacts with lights, got blurry issue
-//const material = new THREE.MeshLambertMaterial();
-
-// less blurry, less performant
-  /*const material = new THREE.MeshPhongMaterial();
-  material.specular = new THREE.Color('#ff0000');*/
-
-// cartoon effect
-  /*const material = new THREE.MeshToonMaterial();
-  material.gradientMap = gradientTexture;*/
-
-// smoother, better parameter, uses PBR
-  const material = new THREE.MeshStandardMaterial();
-  material.metalness = .7;
-  material.roughness = .2;
-  material.envMap = environmentMapTexture;
-
-  /*material.map = doorColorTexture;
-  material.aoMap = doorAmbientOcclusionTexture; // create depth like shadow, need uv2
-  material.aoMapIntensity = 1;
-  material.displacementMap = doorHeightTexture; // white goes up, black goes down, others stand still
-  material.displacementScale = .05;
-  material.metalnessMap = doorMetalnessTexture
-  material.roughnessMap = doorRoughnessTexture
-  material.normalMap = doorNormalTexture
-  material.alphaMap = doorAlphaTexture
-  material.transparent = true*/
-
-  // gui.add(material, 'metalness', 0, 1, .01)
-  // gui.add(material, 'roughness', 0, 1, .01)
-  /*gui.add(material, 'aoMapIntensity', 0, 10, .01)
-  gui.add(material, 'displacementScale', 0, 10, .01)*/
-
-  const sphere = new THREE.Mesh(
-      new THREE.SphereGeometry(.5, 16, 16),
-      material
-  );
-  sphere.position.x = -1.5;
-  sphere.geometry.setAttribute(
-      'uv2',
-      new THREE.BufferAttribute(sphere.geometry.attributes.uv.array, 2)
-  );
-
-  const plane = new THREE.Mesh(
-      new THREE.PlaneGeometry(1, 1, 128, 128),
-      material
-  )
-  plane.geometry.setAttribute(
-      'uv2',
-      new THREE.BufferAttribute(plane.geometry.attributes.uv.array, 2)
-  );
-
-  const torus = new THREE.Mesh(
-      new THREE.TorusGeometry(.3, .2, 64, 128),
-      material
-  )
-  torus.geometry.setAttribute(
-      'uv2',
-      new THREE.BufferAttribute(torus.geometry.attributes.uv.array, 2)
-  );
-
-  torus.position.x = 1.5;
-
-  scene.add(sphere, plane, torus);
+  const textureLoader = new THREE.TextureLoader()
+  const matcapTexture = textureLoader.load('/textures/matcaps/5.png');
 
 
   /**
-   * Lights
+   * Fonts
    */
-  const ambientLight = new THREE.AmbientLight('#fff', .5);
-  scene.add(ambientLight);
+  const fontLoader = new THREE.FontLoader();
+  fontLoader.load(
+      '/fonts/pirata-one-regular.json',
+      (font) => {
+        //console.log('font loaded')
+        const textGeometry = new THREE.TextGeometry(
+            'Hello Simon', {
+              font: font,
+              size: .5,
+              height: .2,
+              curveSegments: 6,
+              bevelEnabled: true,
+              bevelThickness: .03,
+              bevelSize: .02,
+              bevelOffset: 0,
+              bevelSegments: 4
+            }
+        );
 
-  const pointLight = new THREE.PointLight('#fff', .5);
-  pointLight.position.x = 2;
-  pointLight.position.x = 3;
-  pointLight.position.x = 4;
-  scene.add(pointLight);
+        //textGeometry.computeBoundingBox();
+        //console.log(textGeometry.boundingBox)
+        /*textGeometry.translate(
+            -textGeometry.boundingBox.max.x * .5,
+            -textGeometry.boundingBox.max.y * .5,
+            -textGeometry.boundingBox.max.z * .5,
+        );*/
+
+        textGeometry.center();
+
+        const material = new THREE.MeshMatcapMaterial({matcap: matcapTexture});
+        const text = new THREE.Mesh(textGeometry, material);
+        scene.add(text);
+
+        //console.time('donuts');
+
+        const donutGeometry = new THREE.TorusBufferGeometry(.3, .2, 20, 45);
+
+        for(let i = 0; i < 100; i++){
+          const donut = new THREE.Mesh(donutGeometry, material);
+
+          donut.position.x = (Math.random() - .5) * 10;
+          donut.position.y = (Math.random() - .5) * 10;
+          donut.position.z = (Math.random() - .5) * 10;
+
+          donut.rotation.x = Math.random() * Math.PI;
+          donut.rotation.y = Math.random() * Math.PI;
+
+          const scale = Math.random();
+          donut.scale.set(scale, scale, scale);
+
+          scene.add(donut);
+        }
+
+        //console.timeEnd('donuts');
+      }
+  );
 
 
   /**
@@ -211,15 +151,6 @@ onMounted(() => {
 
   const tick = () => {
     const elapsedTime = clock.getElapsedTime()
-
-    // Update objects
-    sphere.rotation.y = .1 * elapsedTime;
-    plane.rotation.y = .1 * elapsedTime;
-    torus.rotation.y = .1 * elapsedTime;
-
-    sphere.rotation.x = .15 * elapsedTime;
-    plane.rotation.x = .15 * elapsedTime;
-    torus.rotation.x = .15 * elapsedTime;
 
     // Update controls
     controls.update()

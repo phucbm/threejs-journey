@@ -1,10 +1,11 @@
 <script setup>
 import * as THREE from 'three';
+
 definePageMeta({title: `Setup`});
 
 const route = useRoute();
 useHead({
-  title: route.name,
+  title: route.meta.title,
   meta: [
     //{name: 'description', content: ''},
     //{property: 'og:description', content: ''},

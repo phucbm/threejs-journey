@@ -1,10 +1,13 @@
 <script setup>
 import * as THREE from 'three';
+//import * as dat from "dat.gui"; todo: import dat.gui
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+
+definePageMeta({title: `Materials`});
 
 const route = useRoute();
 useHead({
-  title: route.name,
+  title: route.meta.title,
   meta: [
     //{name: 'description', content: ''},
     //{property: 'og:description', content: ''},
@@ -18,46 +21,38 @@ onMounted(() => {
   const canvas = canvasRef.value;
 
   /**
+   * Debug
+   */
+  //const gui = new dat.GUI();
+
+
+  /**
    * Textures
    */
-  /*
-  // native js way
-  const image = new Image();
-  const texture = new THREE.Texture(image);
-  image.onload = () => {
-      // tells Threejs this texture will be updated later
-      texture.needsUpdate = true;
-  };
-  image.src = 'textures/door/color.jpg';*/
+  const textureLoader = new THREE.TextureLoader()
+  const cubeTextureLoader = new THREE.CubeTextureLoader()
 
-  const loadingManager = new THREE.LoadingManager();
-  /*loadingManager.onLoad = (data) => {
-      console.log('load', data)
-  };
-  loadingManager.onProgress = (data) => {
-      console.log('progress', data)
-  };
-  loadingManager.onError = (data) => {
-      console.log('error', data)
-  };*/
+  const doorColorTexture = textureLoader.load('/textures/door/color.jpg')
+  const doorAlphaTexture = textureLoader.load('/textures/door/alpha.jpg')
+  const doorAmbientOcclusionTexture = textureLoader.load('/textures/door/ambientOcclusion.jpg')
+  const doorHeightTexture = textureLoader.load('/textures/door/height.jpg')
+  const doorNormalTexture = textureLoader.load('/textures/door/normal.jpg')
+  const doorMetalnessTexture = textureLoader.load('/textures/door/metalness.jpg')
+  const doorRoughnessTexture = textureLoader.load('/textures/door/roughness.jpg')
+  const matcapTexture = textureLoader.load('/textures/matcaps/3.png')
+  const gradientTexture = textureLoader.load('/textures/gradients/3.jpg')
+  gradientTexture.minFilter = THREE.NearestFilter;
+  gradientTexture.magFilter = THREE.NearestFilter;
+  gradientTexture.generateMipmaps = false;
 
-  const textureLoader = new THREE.TextureLoader(loadingManager);
-  const colorTexture = textureLoader.load('/textures/minecraft.png');
-  const alphaTexture = textureLoader.load('/textures/door/alpha.jpg');
-  const heightTexture = textureLoader.load('/textures/door/height.jpg');
-  const normalTexture = textureLoader.load('/textures/door/normal.jpg');
-  const ambientOcclusionTexture = textureLoader.load('/textures/door/ambientOcclusion.jpg');
-  const metalnessTexture = textureLoader.load('/textures/door/metalness.jpg');
-  const roughnessTexture = textureLoader.load('/textures/door/roughness.jpg');
-
-  /*colorTexture.repeat.x = 2;
-  colorTexture.repeat.y = 3;
-  colorTexture.wrapS = THREE.RepeatWrapping;
-  colorTexture.wrapT = THREE.RepeatWrapping;*/
-
-  colorTexture.generateMipmaps = false;
-  colorTexture.minFilter = THREE.NearestFilter;
-  colorTexture.magFilter = THREE.NearestFilter;
+  const environmentMapTexture = cubeTextureLoader.load([
+    '/textures/environmentMaps/1/px.jpg',
+    '/textures/environmentMaps/1/nx.jpg',
+    '/textures/environmentMaps/1/py.jpg',
+    '/textures/environmentMaps/1/ny.jpg',
+    '/textures/environmentMaps/1/pz.jpg',
+    '/textures/environmentMaps/1/nz.jpg',
+  ]);
 
   /**
    * Base
@@ -66,15 +61,105 @@ onMounted(() => {
 // Scene
   const scene = new THREE.Scene()
 
-  /**
-   * Object
-   */
-  const geometry = new THREE.BoxGeometry(1, 1, 1)
-//console.log(geometry.attributes.uv)
 
-  const material = new THREE.MeshBasicMaterial({map: colorTexture})
-  const mesh = new THREE.Mesh(geometry, material)
-  scene.add(mesh)
+  /**
+   * Objects
+   */
+  /*const material = new THREE.MeshBasicMaterial();
+  material.map = doorColorTexture;
+  material.transparent = true;
+  material.alphaMap = doorAlphaTexture; // kind of mask
+  material.side = THREE.DoubleSide; // low performance*/
+
+// direction of the outside of the object: lighting, reflection, refraction, etc.
+  /*const material = new THREE.MeshNormalMaterial();
+  material.flatShading = true;*/
+
+// use image to simulate the lights, shadows
+  /*const material = new THREE.MeshMatcapMaterial();
+  material.matcap = matcapTexture;*/
+
+// further get darker, closer get lighter
+//const material = new THREE.MeshDepthMaterial();
+
+// reacts with lights, got blurry issue
+//const material = new THREE.MeshLambertMaterial();
+
+// less blurry, less performant
+  /*const material = new THREE.MeshPhongMaterial();
+  material.specular = new THREE.Color('#ff0000');*/
+
+// cartoon effect
+  /*const material = new THREE.MeshToonMaterial();
+  material.gradientMap = gradientTexture;*/
+
+// smoother, better parameter, uses PBR
+  const material = new THREE.MeshStandardMaterial();
+  material.metalness = .7;
+  material.roughness = .2;
+  material.envMap = environmentMapTexture;
+
+  /*material.map = doorColorTexture;
+  material.aoMap = doorAmbientOcclusionTexture; // create depth like shadow, need uv2
+  material.aoMapIntensity = 1;
+  material.displacementMap = doorHeightTexture; // white goes up, black goes down, others stand still
+  material.displacementScale = .05;
+  material.metalnessMap = doorMetalnessTexture
+  material.roughnessMap = doorRoughnessTexture
+  material.normalMap = doorNormalTexture
+  material.alphaMap = doorAlphaTexture
+  material.transparent = true*/
+
+  // gui.add(material, 'metalness', 0, 1, .01)
+  // gui.add(material, 'roughness', 0, 1, .01)
+  /*gui.add(material, 'aoMapIntensity', 0, 10, .01)
+  gui.add(material, 'displacementScale', 0, 10, .01)*/
+
+  const sphere = new THREE.Mesh(
+      new THREE.SphereGeometry(.5, 16, 16),
+      material
+  );
+  sphere.position.x = -1.5;
+  sphere.geometry.setAttribute(
+      'uv2',
+      new THREE.BufferAttribute(sphere.geometry.attributes.uv.array, 2)
+  );
+
+  const plane = new THREE.Mesh(
+      new THREE.PlaneGeometry(1, 1, 128, 128),
+      material
+  )
+  plane.geometry.setAttribute(
+      'uv2',
+      new THREE.BufferAttribute(plane.geometry.attributes.uv.array, 2)
+  );
+
+  const torus = new THREE.Mesh(
+      new THREE.TorusGeometry(.3, .2, 64, 128),
+      material
+  )
+  torus.geometry.setAttribute(
+      'uv2',
+      new THREE.BufferAttribute(torus.geometry.attributes.uv.array, 2)
+  );
+
+  torus.position.x = 1.5;
+
+  scene.add(sphere, plane, torus);
+
+
+  /**
+   * Lights
+   */
+  const ambientLight = new THREE.AmbientLight('#fff', .5);
+  scene.add(ambientLight);
+
+  const pointLight = new THREE.PointLight('#fff', .5);
+  pointLight.position.x = 2;
+  pointLight.position.x = 3;
+  pointLight.position.x = 4;
+  scene.add(pointLight);
+
 
   /**
    * Sizes
@@ -105,7 +190,7 @@ onMounted(() => {
   const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
   camera.position.x = 1
   camera.position.y = 1
-  camera.position.z = 1
+  camera.position.z = 2
   scene.add(camera)
 
 // Controls
@@ -129,6 +214,15 @@ onMounted(() => {
   const tick = () => {
     const elapsedTime = clock.getElapsedTime()
 
+    // Update objects
+    sphere.rotation.y = .1 * elapsedTime;
+    plane.rotation.y = .1 * elapsedTime;
+    torus.rotation.y = .1 * elapsedTime;
+
+    sphere.rotation.x = .15 * elapsedTime;
+    plane.rotation.x = .15 * elapsedTime;
+    torus.rotation.x = .15 * elapsedTime;
+
     // Update controls
     controls.update()
 
@@ -142,7 +236,6 @@ onMounted(() => {
   tick()
 });
 </script>
-
 
 <template>
   <div>

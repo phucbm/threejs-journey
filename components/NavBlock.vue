@@ -20,7 +20,9 @@ let isVisible = ref(true);
     <ul class="menu d-flex fd-column">
       <li v-for="route in menuItems" class="w-100">
         <NuxtLink :to="route.path" class="d-block">
-          {{ route.name }}<span v-if="route.meta.title">{{ ` - ${route.meta.title}` }}</span>
+          <span v-if="!isNaN(route.name)">{{ route.name }}</span>
+          <span v-if="!isNaN(route.name) && route.meta.title"> - </span>
+          <span v-if="route.meta.title">{{ route.meta.title }}</span>
         </NuxtLink>
       </li>
     </ul>
