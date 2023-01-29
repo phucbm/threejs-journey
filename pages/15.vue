@@ -1,7 +1,7 @@
 <script setup>
 import * as THREE from 'three';
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
-//import * as dat from 'dat.gui' //todo: import dat.gui
+
 definePageMeta({title: `Galaxy generator`});
 
 const route = useRoute();
@@ -23,7 +23,7 @@ onMounted(() => {
    * Base
    */
 // Debug
-//const gui = new dat.GUI({width: 400})
+  const gui = new dat.GUI({width: 400})
 
 // Scene
   const scene = new THREE.Scene()
@@ -120,15 +120,15 @@ onMounted(() => {
   }
   generateGalaxy()
 
-//gui.add(parameters, 'count').min(100).max(1000000).step(100).onFinishChange(generateGalaxy)
-//gui.add(parameters, 'size').min(.001).max(.1).step(.001).onFinishChange(generateGalaxy)
-//gui.add(parameters, 'radius').min(.01).max(20).step(.01).onFinishChange(generateGalaxy)
-//gui.add(parameters, 'branches').min(2).max(20).step(1).onChange(generateGalaxy)
-//gui.add(parameters, 'spin').min(-5).max(5).step(.01).onFinishChange(generateGalaxy)
-//gui.add(parameters, 'randomness').min(0).max(2).step(.001).onFinishChange(generateGalaxy)
-//gui.add(parameters, 'randomnessPower').min(1).max(10).step(.001).onFinishChange(generateGalaxy)
-//gui.addColor(parameters, 'insideColor').onFinishChange(generateGalaxy)
-//gui.addColor(parameters, 'outsideColor').onFinishChange(generateGalaxy)
+  gui.add(parameters, 'count').min(100).max(1000000).step(100).onFinishChange(generateGalaxy)
+  gui.add(parameters, 'size').min(.001).max(.1).step(.001).onFinishChange(generateGalaxy)
+  gui.add(parameters, 'radius').min(.01).max(20).step(.01).onFinishChange(generateGalaxy)
+  gui.add(parameters, 'branches').min(2).max(20).step(1).onChange(generateGalaxy)
+  gui.add(parameters, 'spin').min(-5).max(5).step(.01).onFinishChange(generateGalaxy)
+  gui.add(parameters, 'randomness').min(0).max(2).step(.001).onFinishChange(generateGalaxy)
+  gui.add(parameters, 'randomnessPower').min(1).max(10).step(.001).onFinishChange(generateGalaxy)
+  gui.addColor(parameters, 'insideColor').onFinishChange(generateGalaxy)
+  gui.addColor(parameters, 'outsideColor').onFinishChange(generateGalaxy)
 
 
   /**

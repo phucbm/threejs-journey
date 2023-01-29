@@ -21,7 +21,13 @@ export default defineNuxtConfig({
             meta: [
                 // <meta name="description" content="My amazing site">
                 //{name: 'description', content: 'My amazing site.'}
-            ]
+            ],
+
+            script: [
+                {
+                    src: "js/dat.gui.js",
+                },
+            ],
         },
 
         // https://nuxt.com/docs/getting-started/transitions

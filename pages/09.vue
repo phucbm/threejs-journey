@@ -1,6 +1,5 @@
 <script setup>
 import * as THREE from 'three';
-//import * as dat from "dat.gui"; todo: import dat.gui
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
 definePageMeta({title: `Materials`});
@@ -23,7 +22,7 @@ onMounted(() => {
   /**
    * Debug
    */
-  //const gui = new dat.GUI();
+  const gui = new dat.GUI();
 
 
   /**
@@ -93,13 +92,13 @@ onMounted(() => {
   /*const material = new THREE.MeshToonMaterial();
   material.gradientMap = gradientTexture;*/
 
-// smoother, better parameter, uses PBR
+  // smoother, better parameter, uses PBR
   const material = new THREE.MeshStandardMaterial();
   material.metalness = .7;
   material.roughness = .2;
   material.envMap = environmentMapTexture;
 
-  /*material.map = doorColorTexture;
+  material.map = doorColorTexture;
   material.aoMap = doorAmbientOcclusionTexture; // create depth like shadow, need uv2
   material.aoMapIntensity = 1;
   material.displacementMap = doorHeightTexture; // white goes up, black goes down, others stand still
@@ -108,12 +107,12 @@ onMounted(() => {
   material.roughnessMap = doorRoughnessTexture
   material.normalMap = doorNormalTexture
   material.alphaMap = doorAlphaTexture
-  material.transparent = true*/
+  material.transparent = true
 
-  // gui.add(material, 'metalness', 0, 1, .01)
-  // gui.add(material, 'roughness', 0, 1, .01)
-  /*gui.add(material, 'aoMapIntensity', 0, 10, .01)
-  gui.add(material, 'displacementScale', 0, 10, .01)*/
+  gui.add(material, 'metalness', 0, 1, .01)
+  gui.add(material, 'roughness', 0, 1, .01)
+  gui.add(material, 'aoMapIntensity', 0, 10, .01)
+  gui.add(material, 'displacementScale', 0, 10, .01)
 
   const sphere = new THREE.Mesh(
       new THREE.SphereGeometry(.5, 16, 16),
@@ -186,14 +185,14 @@ onMounted(() => {
   /**
    * Camera
    */
-// Base camera
+      // Base camera
   const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
   camera.position.x = 1
   camera.position.y = 1
   camera.position.z = 2
   scene.add(camera)
 
-// Controls
+  // Controls
   const controls = new OrbitControls(camera, canvas)
   controls.enableDamping = true
 

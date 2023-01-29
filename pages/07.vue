@@ -4,7 +4,6 @@ import gsap from "gsap";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
 definePageMeta({title: `Debug UI`});
-//import * as dat from 'dat.gui';
 
 const route = useRoute();
 useHead({
@@ -39,8 +38,6 @@ onMounted(() => {
   /**
    * Base
    */
-
-// Scene
   const scene = new THREE.Scene()
 
   /**
@@ -51,26 +48,24 @@ onMounted(() => {
   const mesh = new THREE.Mesh(geometry, material)
   scene.add(mesh)
 
-// Debug todo: import dat.gui
-//   let dat = require('dat.gui')
-//   const gui = new dat.GUI();
-//   gui.add(mesh.position, 'x', -3, 3, .01);
-//   gui.add(mesh.position, 'y')
-//       .min(-3)
-//       .max(3)
-//       .name('elevation')
-//       .step(.01)
-//
-//   gui.add(mesh, 'visible')
-//
-//   gui.add(material, 'wireframe')
-//
-//   gui.addColor(parameters, 'color')
-//       .onChange(() => {
-//         material.color.set(parameters.color)
-//       })
-//
-//   gui.add(parameters, 'spin')
+  let gui = new dat.GUI();
+  gui.add(mesh.position, 'x', -3, 3, .01);
+  gui.add(mesh.position, 'y')
+      .min(-3)
+      .max(3)
+      .name('elevation')
+      .step(.01)
+
+  gui.add(mesh, 'visible')
+
+  gui.add(material, 'wireframe')
+
+  gui.addColor(parameters, 'color')
+      .onChange(() => {
+        material.color.set(parameters.color)
+      })
+
+  gui.add(parameters, 'spin')
 
   /**
    * Sizes
