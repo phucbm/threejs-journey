@@ -9,21 +9,25 @@ let isVisible = ref(true);
 </script>
 
 <template>
-  <nav class="nav ps-fixed z2 d-flex jc-space-between t fw-wrap" :class="{visible:isVisible}">
+  <nav class="nav ps-fixed z2 t" :class="{visible:isVisible}">
 
-    <div class="fl-center" style="gap:10px;">
-      <NuxtLink :to="{name:'index'}" class="fw-bold">ThreeJS Journey</NuxtLink>
+    <div style="margin-bottom:20px;">
+      <NuxtLink :to="{name:'index'}" class="logo fw-bold">ThreeJS Journey</NuxtLink>
     </div>
 
-    <ul class="d-flex fw-wrap">
-      <li v-for="route in menuItems" class="d-flex">
-        <NuxtLink :to="route.path">{{ route.name }}</NuxtLink>
+    <ul class="menu d-flex fd-column">
+      <li v-for="route in menuItems" class="w-100">
+        <NuxtLink :to="route.path" class="d-block">{{ route.name }}</NuxtLink>
       </li>
     </ul>
 
-    <div class="ps-absolute b100p r0">
-      <button @click="isVisible=!isVisible" class="menu-toggle fl-center">
-        {{ isVisible ? 'Close' : 'Open' }}
+    <div class="ps-absolute l100p t0">
+      <button @click="isVisible=!isVisible" class="menu-toggle fl-center us-none ps-relative bar-circle c-pointer">
+        <span class="menu-toggle__inner ps-relative">
+          <i class="ps-absolute l0 d-block t"></i>
+          <i class="ps-absolute l0 d-block t"></i>
+          <i class="ps-absolute l0 d-block t"></i>
+        </span>
       </button>
     </div>
 
@@ -31,34 +35,57 @@ let isVisible = ref(true);
 </template>
 
 <style scoped>
+.logo {
+  color:#fff;
+}
+
 .nav {
+  left:0; top:0; bottom:0;
   background:rgba(0, 0, 0, .6);
   padding:15px 20px;
   backdrop-filter:blur(2px);
-  left:10px; right:10px; bottom:10px;
-  border-radius:12px 0 12px 12px;
   box-shadow:0 0 5px rgba(0, 0, 0, .4);
   gap:15px 20px;
+  min-width:200px;
 }
 .nav:not(.visible) {
-  transform:translateY(calc(100% + 10px));
+  transform:translateX(-100%);
 }
 
-.nav ul {
+.nav ul.menu {
   list-style:none;
   gap:5px 10px;
 }
-.nav a {color:#fff; padding:3px 5px; border-radius:5px;}
-.nav a.router-link-active {
+.nav ul.menu a {
+  color:#fff; padding:5px 10px; border-radius:5px;
+  background:rgba(255, 255, 255, .1);
+}
+.nav ul.menu a.router-link-active {
   background:#fff;
   color:#000;
 }
 
+
+/****************************
+ * Hamburger button
+****************************/
 .menu-toggle {
   box-shadow:0 0 5px rgba(0, 0, 0, .2);
   width:45px; aspect-ratio:1;
-  background:#fff; border-radius:10px 10px 0 0;
-  font-size:12px;
-  cursor:pointer;
+  background:deepskyblue; color:#fff;
+  margin:10px;
 }
+
+.menu-toggle__inner {width:15px; height:12px;}
+
+/* Lines */
+.menu-toggle__inner i {width:100%; height:2px; border-radius:2px; background:#fff;}
+.menu-toggle__inner i:nth-child(1) {top:0;}
+.menu-toggle__inner i:nth-child(2) {top:5px; width:8px;}
+.menu-toggle__inner i:nth-child(3) {bottom:0; width:11px;}
+
+/* Open */
+.nav.visible .menu-toggle__inner i:nth-child(1) {transform:rotate(45deg); top:5px;}
+.nav.visible .menu-toggle__inner i:nth-child(3) {transform:rotate(-45deg); bottom:5px; width:100%;}
+.nav.visible .menu-toggle__inner i:nth-child(2) {width:0; left:200%; opacity:0;}
 </style>
