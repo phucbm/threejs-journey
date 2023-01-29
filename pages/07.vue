@@ -17,8 +17,9 @@ useHead({
 
 const canvasRef = ref(null);
 
-onMounted(() => {
+onMounted(async() => {
   if(process.server) return;
+  const dat = await import('dat.gui')
 
   const canvas = canvasRef.value;
 

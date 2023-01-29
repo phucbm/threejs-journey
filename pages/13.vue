@@ -16,7 +16,9 @@ useHead({
 
 const canvasRef = ref(null);
 
-onMounted(() => {
+onMounted(async() => {
+  if(process.server) return;
+  const dat = await import('dat.gui')
   const canvas = canvasRef.value;
 
   /**
@@ -29,8 +31,7 @@ onMounted(() => {
   const scene = new THREE.Scene()
 
 // Fog
-  const fog = new THREE.Fog('#262837', 1, 15)
-  scene.fog = fog
+  scene.fog = new THREE.Fog('#262837', 1, 15)
 
   /**
    * Textures
