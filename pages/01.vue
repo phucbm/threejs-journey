@@ -1,5 +1,6 @@
 <script setup>
 import * as THREE from 'three';
+definePageMeta({title: `Setup`});
 
 const route = useRoute();
 useHead({

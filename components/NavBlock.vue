@@ -1,5 +1,7 @@
 <script setup>
 const routes = useRouter().options.routes;
+const route = useRoute();
+
 const excluded = ['00', 'index'];
 const menuItems = computed(() => {
   return routes.filter(e => !excluded.includes(e.name));
@@ -17,7 +19,9 @@ let isVisible = ref(true);
 
     <ul class="menu d-flex fd-column">
       <li v-for="route in menuItems" class="w-100">
-        <NuxtLink :to="route.path" class="d-block">{{ route.name }}</NuxtLink>
+        <NuxtLink :to="route.path" class="d-block">
+          {{ route.name }}<span v-if="route.meta.title">{{ ` - ${route.meta.title}` }}</span>
+        </NuxtLink>
       </li>
     </ul>
 
