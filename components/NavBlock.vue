@@ -13,7 +13,7 @@ let isVisible = ref(true);
 <template>
   <nav class="nav ps-fixed z2 t" :class="{visible:isVisible}">
 
-    <div style="margin-bottom:20px;">
+    <div class="title" style="margin-bottom:20px;">
       <NuxtLink :to="{name:'index'}" class="logo fw-bold">ThreeJS Journey</NuxtLink>
     </div>
 
@@ -44,11 +44,14 @@ let isVisible = ref(true);
 .logo {
   color:#fff;
 }
+.title {
+  padding:0 20px;
+}
 
 .nav {
   left:0; top:0; bottom:0;
   background:rgba(0, 0, 0, .6);
-  padding:15px 20px;
+  padding:15px 0;
   backdrop-filter:blur(2px);
   box-shadow:0 0 5px rgba(0, 0, 0, .4);
   gap:15px 20px;
@@ -61,6 +64,9 @@ let isVisible = ref(true);
 .nav ul.menu {
   list-style:none;
   gap:5px 10px;
+  overflow:auto;
+  padding:0 20px;
+  max-height:calc(100vh - 80px);
 }
 .nav ul.menu a {
   color:#fff; padding:5px 10px; border-radius:5px;
@@ -71,6 +77,11 @@ let isVisible = ref(true);
   color:#000;
 }
 
+/* custom scrollbar */
+/* Works on Chrome, Edge, and Safari */
+.nav ul.menu::-webkit-scrollbar {width:2px;}
+.nav ul.menu::-webkit-scrollbar-track {background:rgba(26, 17, 17, 0);}
+.nav ul.menu::-webkit-scrollbar-thumb {background-color:#fff;}
 
 /****************************
  * Hamburger button
