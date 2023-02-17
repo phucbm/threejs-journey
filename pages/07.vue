@@ -1,6 +1,7 @@
 <script setup>
 import * as THREE from 'three';
 import gsap from "gsap";
+import * as dat from "lil-gui";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
 definePageMeta({title: `Debug UI`});
@@ -19,8 +20,6 @@ const canvasRef = ref(null);
 
 onMounted(async() => {
   if(process.server) return;
-  const dat = await import('dat.gui')
-
   const canvas = canvasRef.value;
 
   /**

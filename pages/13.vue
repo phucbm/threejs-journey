@@ -1,5 +1,6 @@
 <script setup>
 import * as THREE from 'three';
+import * as dat from "lil-gui";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
 definePageMeta({title: `The haunted house`});
@@ -18,7 +19,6 @@ const canvasRef = ref(null);
 
 onMounted(async() => {
   if(process.server) return;
-  const dat = await import('dat.gui')
   const canvas = canvasRef.value;
 
   /**
