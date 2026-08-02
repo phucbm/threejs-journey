@@ -103,6 +103,20 @@ a:hover {
   background-color: #fff;
 }
 
+.nav-footer {
+  padding: 0 20px;
+  margin-top: auto;
+}
+
+.nav-footer a {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+}
+
+.nav-footer a:hover {
+  color: #fff;
+}
+
 /**
  * Hamburger toggle button
  */

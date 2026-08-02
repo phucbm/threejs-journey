@@ -36,6 +36,16 @@ function renderNav(): void {
   }
   nav.appendChild(ul);
 
+  const footer = document.createElement('div');
+  footer.className = 'nav-footer';
+  const repoLink = document.createElement('a');
+  repoLink.href = 'https://github.com/phucbm/threejs-journey';
+  repoLink.target = '_blank';
+  repoLink.rel = 'noopener';
+  repoLink.textContent = 'GitHub ↗';
+  footer.appendChild(repoLink);
+  nav.appendChild(footer);
+
   const toggle = document.createElement('button');
   toggle.id = 'nav-toggle';
   toggle.className = 'nav-toggle';
