@@ -91,7 +91,7 @@ export const lessons: Lesson[] = [
     description: 'A scroll-driven infinite grid of Minecraft-style blocks built with GSAP ScrollTrigger and Three.js text geometry.',
   },
   {
-    slug: 'themess', title: 'The mess',
+    slug: 'the-mess', title: 'The mess',
     description: 'An experimental scene mixing OrbitControls, custom draw ranges, and buffer geometry.',
   },
 ];

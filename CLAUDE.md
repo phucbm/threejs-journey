@@ -8,10 +8,14 @@ The site previously ran on Nuxt 3 / Vue, deployed to Netlify. That version is pr
 
 ## Structure
 
-Each lesson is a standalone, self-contained page living in its own folder at the repo root:
+Each lesson is a standalone, self-contained page, grouped on disk under `lessons/` (numbered course chapters) or `playground/` (one-off experiments like `mineblocks`, `the-mess`):
 
 ```
-01-setup/
+lessons/01-setup/
+  index.html
+  script.ts
+
+playground/the-mess/
   index.html
   script.ts
 ```
@@ -20,6 +24,7 @@ Each lesson is a standalone, self-contained page living in its own folder at the
 - `script.ts` holds the lesson's Three.js code, unmodified in spirit from the original course exercises — imperative, no framework.
 - Every lesson's `index.html` includes exactly two shared files: `<link rel="stylesheet" href="/src/styles/global.css">` and `<script type="module" src="/src/lib/global.ts">`. Nothing else is shared — copy a lesson folder out and, aside from those two includes, it's fully standalone.
 - Future React/react-three-fiber lessons follow the same shape but with `main.tsx` (+ `App.tsx`) instead of `script.ts`, mounting into a `<div id="root">` instead of `<canvas class="webgl">`.
+- **The `lessons/`/`playground/` grouping is a filesystem-only concern.** URLs stay flat regardless — `lessons/01-setup/` and `playground/the-mess/` are served/built as `/01-setup/` and `/the-mess/`. See "Build entries" below for how.
 
 ## Shared infra (`src/`)
 
@@ -36,9 +41,14 @@ The site deploys under `https://phucbm.github.io/threejs-journey/`, so `vite.con
 - `<script type="module" src="...">` / `<link rel="stylesheet" href="...">` referencing files under `src/` do NOT need this — Vite resolves and rewrites those automatically as part of the build.
 - Always verify with `pnpm build && pnpm preview` (not just `pnpm dev`) before assuming assets load correctly — a missed prefix shows up as a 404 there.
 
-## Build entries
+## Build entries and flat URLs
 
-`vite.config.ts` auto-discovers build entries by scanning the repo root for any folder containing an `index.html` (skipping `node_modules`, `dist`, `public`, `src`, `.git`, `.github`, `.idea`). No manual entry list to maintain when adding a lesson.
+`vite.config.ts`'s `flattenGroupsPlugin` does two things so `lessons/`/`playground/` stay purely organizational:
+
+- **Entry discovery**: scans `lessons/*/index.html` and `playground/*/index.html` and builds the Rollup input map keyed by slug (folder name) — no manual entry list to maintain when adding a lesson.
+- **Flat URLs**: in dev, a `configureServer` middleware rewrites requests like `/01-setup/...` to `lessons/01-setup/...` (or `playground/...`) transparently, so the browser only ever sees the flat URL. In build, a `closeBundle` hook moves each `dist/lessons/<slug>` and `dist/playground/<slug>` folder up to `dist/<slug>` after Vite finishes writing — this runs as a post-build filesystem move rather than trying to rename entries mid-build, because Vite's internal HTML-emitting pipeline doesn't cooperate reliably with renaming bundle entries in `generateBundle`.
+
+Adding a lesson: create `lessons/<slug>/` (or `playground/<slug>/`) with `index.html` + `script.ts`, add one entry to `src/lib/lessons.ts`. Nothing else needs touching.
 
 ## three.js version
 
