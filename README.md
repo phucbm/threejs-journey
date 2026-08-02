@@ -1,12 +1,12 @@
 # Three.js Journey
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/c47c5f67-3da3-4e99-b6cc-23d1fa909f5e/deploy-status)](https://app.netlify.com/sites/three-js-journey/deploys)
-
-> Demo: https://three-js-journey.netlify.app
+> Demo: https://phucbm.github.io/threejs-journey/
 
 ---
 
-Lesson recap and exercises.
+Lesson recap and exercises. Each lesson is a standalone page (`<slug>/index.html` + `<slug>/script.ts`) built with plain Vite + TypeScript — no framework. See `CLAUDE.md` for the infra details.
+
+The original Nuxt 3 / Vue version of this site is preserved on the [`legacy/nuxt-vue`](https://github.com/phucbm/threejs-journey/tree/legacy/nuxt-vue) branch.
 
 ## Chapter 01 - Basics
 
@@ -137,15 +137,22 @@ Just pulling some crazy ideas out of my sweaty brain.
 
 ---
 
-## Deployment
+## Development
 
 ```shell
-# Install package
-npm i
+# Install packages
+pnpm install
 
 # Start dev server
-npm run dev
+pnpm dev
 
-# Generate static site
-nuxt generate
+# Build the static site
+pnpm build
+
+# Preview the production build locally
+pnpm preview
 ```
+
+## Deployment
+
+Pushing to `master` triggers `.github/workflows/deploy.yml`, which builds with `pnpm build` and deploys `dist/` to GitHub Pages.

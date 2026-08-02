@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="%BASE_URL%img/favicon.png" />
+  <link rel="canonical" href="https://phucbm.github.io/threejs-journey/mineblocks/" />
+  <title>Infinite Minecraft Blocks - ThreeJs Journey</title>
+  <meta name="description" content="A scroll-driven infinite grid of Minecraft-style blocks built with GSAP ScrollTrigger and Three.js text geometry." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Infinite Minecraft Blocks - ThreeJs Journey" />
+  <meta property="og:description" content="A scroll-driven infinite grid of Minecraft-style blocks built with GSAP ScrollTrigger and Three.js text geometry." />
+  <meta property="og:url" content="https://phucbm.github.io/threejs-journey/mineblocks/" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="/src/styles/global.css" />
+  <style>
+    /* ported verbatim (in spirit) from the original pages/mineblocks.vue <style> block —
+       required for the ScrollTrigger-driven carousel to have scroll height to scrub against.
+       The original targeted Nuxt's #__nuxt root wrapper to pin it in place; here the canvas
+       itself is pinned since there is no app-root wrapper in this plain Vite setup. */
+    html {
+      overflow: auto;
+    }
+
+    body.mineblocks {
+      height: 1500vh;
+      overflow: auto;
+    }
+
+    body.mineblocks canvas.webgl {
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body class="mineblocks">
+  <canvas class="webgl"></canvas>
+  <script type="module" src="/src/lib/global.ts"></script>
+  <script type="module" src="./script.ts"></script>
+</body>
+</html>
