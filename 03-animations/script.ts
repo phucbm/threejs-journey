@@ -16,11 +16,25 @@ const mesh2 = new THREE.Mesh(geometry, material)
 scene.add(mesh)
 scene2.add(mesh2)
 
-// Sizes
+// Sizes — each canvas takes half the viewport width, full height
 const sizes = {
-  width: 400,
-  height: 300
+  width: window.innerWidth / 2,
+  height: window.innerHeight
 }
+window.addEventListener('resize', () => {
+  sizes.width = window.innerWidth / 2;
+  sizes.height = window.innerHeight;
+
+  camera.aspect = sizes.width / sizes.height;
+  camera.updateProjectionMatrix();
+  camera2.aspect = sizes.width / sizes.height;
+  camera2.updateProjectionMatrix();
+
+  renderer.setSize(sizes.width, sizes.height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer2.setSize(sizes.width, sizes.height);
+  renderer2.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+});
 
 // Camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
@@ -34,7 +48,9 @@ scene2.add(camera2)
 const renderer = new THREE.WebGLRenderer({canvas: canvas});
 const renderer2 = new THREE.WebGLRenderer({canvas: canvas2});
 renderer.setSize(sizes.width, sizes.height)
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer2.setSize(sizes.width, sizes.height)
+renderer2.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 // Delta time: the amount of milliseconds that elapsed since the previous tick
 let time = Date.now();

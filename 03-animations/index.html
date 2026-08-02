@@ -13,6 +13,16 @@
   <meta property="og:url" content="https://phucbm.github.io/threejs-journey/03-animations/" />
   <meta name="twitter:card" content="summary" />
   <link rel="stylesheet" href="/src/styles/global.css" />
+  <style>
+    /* two canvases split the viewport side by side, each fullscreen-height */
+    body {
+      display: flex;
+    }
+    canvas.webgl,
+    canvas.webgl-2 {
+      display: block;
+    }
+  </style>
 </head>
 <body>
   <canvas class="webgl"></canvas>
