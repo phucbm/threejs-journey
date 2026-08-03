@@ -118,6 +118,21 @@ The original Nuxt 3 / Vue version of this site is preserved on the [`legacy/nuxt
 
 - `THREE.Raycaster()`: create hover, click events
 
+### 20. Physics
+
+#### 3D physics libraries
+
+- Ammo.js (most used)
+- Cannon.js (easier to implement and understand)
+- Oimo.js
+
+#### 2D physics libraries
+
+- Matter.js
+- P2.js
+- Planck.js
+- Box2D.js
+
 ---
 
 ## Playground

@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      cannon:
+        specifier: ^0.6.2
+        version: 0.6.2
       gsap:
         specifier: ^3.15.0
         version: 3.15.0
@@ -377,6 +380,9 @@ packages:
     engines: {node: '>=16.20.0'}
     cpu: [x64]
     os: [win32]
+
+  cannon@0.6.2:
+    resolution: {integrity: sha512-n/7wWSXr8KOSvjad2x0fJHgpMepKjOKi+NdSnjfYyijoDBZnp4JQKgPcpv28jlXoWM+N9zVYU09J0A6Qxx+Y7w==}
 
   detect-libc@2.1.2:
     resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
@@ -877,6 +883,8 @@ snapshots:
 
   '@typescript/typescript-win32-x64@7.0.2':
     optional: true
+
+  cannon@0.6.2: {}
 
   detect-libc@2.1.2: {}
 

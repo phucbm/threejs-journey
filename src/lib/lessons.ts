@@ -83,7 +83,7 @@ export const lessons: Lesson[] = [
     description: 'Animating objects and camera based on scroll position with GSAP and lil-gui.',
   },
   {
-    slug: '18-physics', number: '18', title: 'Physics - Unfinished',
+      slug: '20-physics', number: '20', title: 'Physics - Unfinished',
     description: 'Placeholder — physics chapter not started yet.',
   },
   {
