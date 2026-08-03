@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js'
 import GUI from 'lil-gui'
 import CANNON from 'cannon';
+import hitSoundUrl from './sounds/hit.mp3'
 
 /**
  * Debug
@@ -35,6 +36,8 @@ gui.add(debugObject, 'createBox');
 /**
  * Base
  */
+const base = import.meta.env.BASE_URL;
+
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
@@ -42,12 +45,26 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 /**
+ * Sounds
+ */
+const hitSound = new Audio(hitSoundUrl)
+const playHitSound = (collision) => {
+    const impactStrength = collision.contact.getImpactVelocityAlongNormal();
+
+    if(impactStrength > .5){
+        hitSound.volume = Math.min(1, impactStrength / 8)
+        hitSound.currentTime = 0
+        hitSound.play().then(r => {
+        });
+    }
+}
+
+/**
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
 const cubeTextureLoader = new THREE.CubeTextureLoader()
 
-const base = import.meta.env.BASE_URL
 const environmentMapTexture = cubeTextureLoader.load([
     `${base}textures/environmentMaps/0/px.png`,
     `${base}textures/environmentMaps/0/nx.png`,
@@ -228,6 +245,7 @@ const createSphere = (radius, position) => {
         material: defaultMaterial
     })
     body.position.copy(position)
+    body.addEventListener('collide', playHitSound)
     world.addBody(body)
 
     // Save in objects to update
@@ -259,6 +277,7 @@ const createBox = (width, height, depth, position) => {
         material: defaultMaterial
     })
     body.position.copy(position)
+    body.addEventListener('collide', playHitSound)
     world.addBody(body)
 
     // Save in objects to update
