@@ -40,6 +40,7 @@ debugObject.reset = () => {
         scene.remove(object.mesh)
     }
 
+    // Empty the array
     objectsToUpdate.splice(0, objectsToUpdate.length);
 }
 gui.add(debugObject, 'createSphere');
