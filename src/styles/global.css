@@ -48,6 +48,7 @@ a:hover {
   flex-direction: column;
   gap: 15px 20px;
   min-width: 200px;
+  transition: transform 0.3s ease;
 }
 
 .nav:not(.visible) {

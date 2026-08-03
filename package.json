@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "cannon": "^0.6.2",
     "gsap": "^3.15.0",
     "lil-gui": "^0.21.0",
     "three": "^0.130.0"
