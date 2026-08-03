@@ -7,9 +7,13 @@ function isActive(href: string): boolean {
   return current === href.replace(/\/$/, '');
 }
 
+const NAV_VISIBLE_KEY = 'nav-visible';
+
 function renderNav(): void {
+  const isVisible = localStorage.getItem(NAV_VISIBLE_KEY) !== 'false';
+
   const nav = document.createElement('nav');
-  nav.className = 'nav visible';
+  nav.className = isVisible ? 'nav visible' : 'nav';
   nav.id = 'site-nav';
 
   const title = document.createElement('div');
@@ -51,7 +55,10 @@ function renderNav(): void {
   toggle.className = 'nav-toggle';
   toggle.setAttribute('aria-label', 'Toggle menu');
   toggle.innerHTML = '<span class="nav-toggle__inner"><i></i><i></i><i></i></span>';
-  toggle.addEventListener('click', () => nav.classList.toggle('visible'));
+  toggle.addEventListener('click', () => {
+    const visible = nav.classList.toggle('visible');
+    localStorage.setItem(NAV_VISIBLE_KEY, String(visible));
+  });
   nav.appendChild(toggle);
 
   document.body.prepend(nav);
