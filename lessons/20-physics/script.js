@@ -63,6 +63,8 @@ const environmentMapTexture = cubeTextureLoader.load([
 // World
 const world = new CANNON.World();
 world.gravity.set(0, -9.82, 0);
+world.allowSleep = true
+world.broadphase = new CANNON.SAPBroadphase(world);
 
 // Materials
 const defaultMaterial = new CANNON.Material('default')
@@ -139,7 +141,7 @@ scene.add(floor)
 /**
  * Lights
  */
-const ambientLight = new THREE.AmbientLight(0xffffff, 2.1)
+const ambientLight = new THREE.AmbientLight(0xffffff, .5)
 scene.add(ambientLight)
 
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6)

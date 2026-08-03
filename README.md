@@ -118,6 +118,8 @@ The original Nuxt 3 / Vue version of this site is preserved on the [`legacy/nuxt
 
 - `THREE.Raycaster()`: create hover, click events
 
+## Chapter 03 - Advanced techniques
+
 ### 20. Physics
 
 #### 3D physics libraries
@@ -132,6 +134,23 @@ The original Nuxt 3 / Vue version of this site is preserved on the [`legacy/nuxt
 - P2.js
 - Planck.js
 - Box2D.js
+
+#### Performance
+
+Broadphase
+
+- Testing an object against other objects
+- NaiveBroadphase ⇒ tests every Bodies against every other Bodies
+- GridBroadphase => quadrilles the world and only tests Bodies against other Bodies in the same grid box or the
+  neighbors' grid boxes
+- SAPBroadphase (Sweep And Prune) => tests Bodies on arbitrary axes during multiples steps => Recommended
+
+Sleep
+
+```js
+const world = new CANNON.World();
+world.allowSleep = true;
+```
 
 ---
 
