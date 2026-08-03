@@ -36,7 +36,47 @@ const environmentMapTexture = cubeTextureLoader.load([
 /**
  * Physics
  */
+// World
 const world = new CANNON.World();
+world.gravity.set(0, -9.82, 0);
+
+// Materials
+const defaultMaterial = new CANNON.Material('default')
+// const concreteMaterial = new CANNON.Material('concrete')
+// const plasticMaterial = new CANNON.Material('plastic')
+
+const defaultContactMaterial = new CANNON.ContactMaterial(
+    defaultMaterial,
+    defaultMaterial,
+    {
+        friction: 0.1, // 0.3,
+        restitution: 0.4 // bouncing
+    }
+)
+world.addContactMaterial(defaultContactMaterial)
+world.defaultContactMaterial = defaultContactMaterial;
+
+// Sphere
+const sphereShape = new CANNON.Sphere(0.5);
+const sphereBody = new CANNON.Body({
+    mass: 1,
+    position: new CANNON.Vec3(0, 3, 0),
+    shape: sphereShape,
+    // material: defaultMaterial
+})
+world.addBody(sphereBody)
+
+// floor
+const floorShape = new CANNON.Plane();
+const floorBody = new CANNON.Body();
+floorBody.mass = 0;
+floorBody.addShape(floorShape)
+// floorBody.material = defaultMaterial
+floorBody.quaternion.setFromAxisAngle(
+    new CANNON.Vec3(-1, 0, 0),
+    Math.PI * 0.5
+)
+world.addBody(floorBody)
 
 /**
  * Test sphere
@@ -137,9 +177,18 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
  * Animate
  */
 const clock = new THREE.Clock()
+let oldElapsedTime = 0
 
 const tick = () => {
     const elapsedTime = clock.getElapsedTime()
+    const deltaTime = elapsedTime - oldElapsedTime
+    oldElapsedTime = elapsedTime
+
+    // Update physics world
+    world.step(1 / 60, 0, 3);
+    // console.log(sphereBody.position.y)
+
+    sphere.position.copy(sphereBody.position)
 
     // Update controls
     controls.update()
