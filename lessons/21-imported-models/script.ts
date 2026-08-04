@@ -1,5 +1,6 @@
 import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js'
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js'
 import GUI from 'lil-gui'
 
 /**
@@ -13,6 +14,29 @@ const canvas = document.querySelector('canvas.webgl') as HTMLCanvasElement
 
 // Scene
 const scene = new THREE.Scene()
+
+/**
+ * Models
+ */
+const gltfLoader = new GLTFLoader()
+gltfLoader.load(
+    './models/Duck/glTF/Duck.gltf',
+    (gltf) => {
+        // scene.add(gltf.scene.children[0])
+    }
+)
+gltfLoader.load(
+    './models/FlightHelmet/glTF/FlightHelmet.gltf',
+    (gltf) => {
+        // scene.add(gltf.scene)
+
+        for (const child of [...gltf.scene.children]) {
+            scene.add(child)
+        }
+
+        console.log(scene)
+    }
+)
 
 /**
  * Floor
@@ -32,10 +56,10 @@ scene.add(floor)
 /**
  * Lights
  */
-const ambientLight = new THREE.AmbientLight(0xffffff, 2.4)
+const ambientLight = new THREE.AmbientLight(0xffffff, .5)
 scene.add(ambientLight)
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1.8)
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2)
 directionalLight.castShadow = true
 directionalLight.shadow.mapSize.set(1024, 1024)
 directionalLight.shadow.camera.far = 15
