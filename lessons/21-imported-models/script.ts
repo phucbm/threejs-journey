@@ -9,6 +9,31 @@ import GUI from 'lil-gui'
  */
 // Debug
 const gui = new GUI()
+type FoxAnimationName = 'watching' | 'walking' | 'running'
+let activeAction: THREE.AnimationAction;
+const foxActions = {} as Record<FoxAnimationName, THREE.AnimationAction>;
+const playAction = (name: FoxAnimationName) => {
+    const nextAction = foxActions[name]
+    if (nextAction === activeAction) return
+
+    // gradually change to new pose
+    activeAction.fadeOut(0.5)
+    nextAction.reset().fadeIn(0.5).play()
+
+    // without cross-fade, visible pop between poses
+    // nextAction.play();
+
+    activeAction = nextAction
+}
+
+const animationDebugObject = {
+    watching: () => playAction('watching'),
+    walking: () => playAction('walking'),
+    running: () => playAction('running')
+}
+gui.add(animationDebugObject, 'watching')
+gui.add(animationDebugObject, 'walking')
+gui.add(animationDebugObject, 'running')
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl') as HTMLCanvasElement
@@ -29,9 +54,13 @@ gltfLoader.load(
     './models/Fox/glTF/Fox.gltf',
     (gltf) => {
         mixer = new THREE.AnimationMixer(gltf.scene)
-        const action = mixer.clipAction(gltf.animations[1])
 
-        action.play()
+        foxActions.watching = mixer.clipAction(gltf.animations[0])
+        foxActions.walking = mixer.clipAction(gltf.animations[1])
+        foxActions.running = mixer.clipAction(gltf.animations[2])
+
+        activeAction = foxActions.walking
+        activeAction.play()
 
         gltf.scene.scale.set(0.025, .025, .025)
         scene.add(gltf.scene)
