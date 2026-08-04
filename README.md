@@ -155,6 +155,11 @@ world.allowSleep = true;
 > Physics is handled by CPU and can quickly overload => Use Worker
 > Physijs looks like the easiest library to apply physic, built on top of Ammo.js with worker supported natively
 
+### 21. Imported models
+#### GLTF Loader
+#### DRACO Loader
+- Web Assembly available
+
 ---
 
 ## Playground
