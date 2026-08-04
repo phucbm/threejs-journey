@@ -156,9 +156,8 @@ world.allowSleep = true;
 > Physijs looks like the easiest library to apply physic, built on top of Ammo.js with worker supported natively
 
 ### 21. Imported models
-#### GLTF Loader
-#### DRACO Loader
-- Web Assembly available
+- GLTF Loader
+- DRACO Loader: Web Assembly available
 
 ---
 
