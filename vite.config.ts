@@ -66,6 +66,18 @@ function flattenGroupsPlugin(): Plugin {
         if (!existsSync(groupOut)) continue;
         for (const slug of readdirSync(groupOut)) {
           cpSync(join(groupOut, slug), join(outDir, slug), { recursive: true });
+
+          // Lesson-local asset folders (models/, textures/, sounds/, ...) aren't
+          // referenced by index.html or pulled into the Rollup module graph, so
+          // Vite's build never sees them — copy them over directly, keeping each
+          // lesson self-contained instead of requiring shared public/ assets.
+          const srcDir = join(root, group, slug);
+          for (const entry of readdirSync(srcDir)) {
+            const entryPath = join(srcDir, entry);
+            if (statSync(entryPath).isDirectory()) {
+              cpSync(entryPath, join(outDir, slug, entry), { recursive: true });
+            }
+          }
         }
         rmSync(groupOut, { recursive: true, force: true });
       }

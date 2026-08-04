@@ -87,6 +87,10 @@ export const lessons: Lesson[] = [
         description: 'Create a physics world using cannon.js',
     },
     {
+        slug: '21-imported-models', number: '21', title: 'Imported models',
+        description: 'Loading external 3D models with GLTFLoader — glTF format, Draco compression, and animated models.',
+    },
+    {
         slug: 'mineblocks', title: 'Infinite Minecraft Blocks',
         description: 'A scroll-driven infinite grid of Minecraft-style blocks built with GSAP ScrollTrigger and Three.js text geometry.',
     },
