@@ -91,6 +91,10 @@ export const lessons: Lesson[] = [
         description: 'Loading external 3D models with GLTFLoader — glTF format, Draco compression, and animated models.',
     },
     {
+        slug: '22-raycaster-and-mouse-events', number: '22', title: 'Raycaster and mouse events',
+        description: 'Raycasting from the mouse — hover and click detection on multiple objects, plus intersecting an imported glTF model.',
+    },
+    {
         slug: 'mineblocks', title: 'Infinite Minecraft Blocks',
         description: 'A scroll-driven infinite grid of Minecraft-style blocks built with GSAP ScrollTrigger and Three.js text geometry.',
     },
