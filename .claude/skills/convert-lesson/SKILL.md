@@ -61,6 +61,17 @@ that structure.
    module URL and works regardless of base path or which slug it's served
    under.
 
+   This applies to any loader path config, not just `.load()` calls —
+   `DRACOLoader.setDecoderPath(...)` is the same trap in a different shape.
+   `lessons/21-imported-models/script.ts` originally shipped with
+   `dracoLoader.setDecoderPath('/draco/')` — a root-**absolute** path, which
+   resolves to the site's domain root regardless of `base` in
+   `vite.config.ts`, i.e. it silently points outside `/threejs-journey/`
+   entirely. It went unnoticed because that lesson's actual `.load()` call
+   uses the non-Draco model variant, so the decoder path is configured but
+   never exercised. Use `'./draco/'` (relative, lesson-local) instead — same
+   fix as any other loader path.
+
 4. **Delete the starter pack's own tooling** — this repo already has one
    shared Vite config, so none of this is needed:
    `package.json`, `readme.md`, `vite.config.js`, `src/style.css`,
