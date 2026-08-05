@@ -72,12 +72,56 @@ that structure.
    never exercised. Use `'./draco/'` (relative, lesson-local) instead — same
    fix as any other loader path.
 
-4. **Delete the starter pack's own tooling** — this repo already has one
+4. **Check for three.js APIs the pinned version has removed or deprecated.**
+   Starter packs are written against the original course's three.js version
+   (the course predates most of these changes); this repo now runs
+   `three@^0.185.1` (bumped from the long-standing `0.130.0` pin in a626f08 —
+   see the note on the version pin in `CLAUDE.md`, which may be stale). Two
+   categories of breakage to check for while porting the script:
+   - **Removed from the `THREE` namespace — build fails loudly.** `pnpm build`
+     emits an `IMPORT_IS_UNDEFINED` warning for each of these, so step 7's
+     build check will catch anything missed here. Still worth fixing at
+     conversion time rather than leaving for a later cleanup pass:
+     - `THREE.BoxBufferGeometry` / `SphereBufferGeometry` / `PlaneBufferGeometry`
+       / `ConeBufferGeometry` / `TorusBufferGeometry` (etc.) → drop the
+       `Buffer` infix: `THREE.BoxGeometry`, `THREE.SphereGeometry`, ...
+     - `THREE.FontLoader` / `THREE.TextGeometry` → no longer attached to the
+       `THREE` namespace; import from examples/jsm instead:
+       ```ts
+       import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
+       import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
+       ```
+   - **Deprecated but silently still work — no build warning, only a runtime
+     console warning.** These won't surface in `pnpm build`; only checking the
+     browser console (or knowing to grep for them) catches them:
+     - `new THREE.Clock()` → replaced by `THREE.Timer`, which is not a
+       drop-in rename — it needs an explicit `timer.update()` call once per
+       frame before reading it, and the getters are renamed
+       (`getElapsedTime()` → `getElapsed()`, `getDelta()` stays):
+       ```ts
+       const timer = new THREE.Timer()
+       const tick = () => {
+         timer.update()
+         const elapsedTime = timer.getElapsed()
+         ...
+       }
+       ```
+     - `renderer.shadowMap.type = THREE.PCFSoftShadowMap` → the renderer now
+       silently substitutes `PCFShadowMap` at render time (harder shadow
+       edges than the lesson intended, with no error). Use
+       `THREE.VSMShadowMap` instead for the equivalent soft-shadow look.
+
+   If a whole batch of already-converted lessons needs this same fix (e.g.
+   after discovering the pin was bumped), it's a big enough diff to land as
+   its own PR separate from whatever lesson prompted the discovery — see
+   PRs #7 and #8 for the precedent.
+
+5. **Delete the starter pack's own tooling** — this repo already has one
    shared Vite config, so none of this is needed:
    `package.json`, `readme.md`, `vite.config.js`, `src/style.css`,
    `src/index.html`. Remove the now-empty `src/` directory.
 
-5. **Write a new flat `index.html` at the lesson root.** Copy the shape from
+6. **Write a new flat `index.html` at the lesson root.** Copy the shape from
    an existing lesson (`lessons/17-scroll-based-animation/index.html` is a
    clean reference — real title/description, not a stale placeholder like
    `lessons/20-physics/index.html` has). Required pieces:
@@ -91,12 +135,12 @@ that structure.
      (note `%BASE_URL%`, not `import.meta.env.BASE_URL` — this is raw HTML,
      Vite substitutes it at build time)
 
-6. **Register the lesson in `src/lib/lessons.ts`.** One entry: `slug`,
+7. **Register the lesson in `src/lib/lessons.ts`.** One entry: `slug`,
    `number` (if it's a numbered course chapter), `title`, `description`.
    This alone drives both the nav sidebar and the page's SEO tags — nothing
    else needs touching.
 
-7. **Verify with a real build, not just dev.**
+8. **Verify with a real build, not just dev.**
    ```
    pnpm build && find dist/<slug> -maxdepth 3
    ```
