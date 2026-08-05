@@ -12,11 +12,11 @@
     "cannon": "^0.6.2",
     "gsap": "^3.15.0",
     "lil-gui": "^0.21.0",
-    "three": "^0.130.0"
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
-    "@types/three": "^0.130.1",
+    "@types/three": "^0.185.4",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
     "vite": "^8.2.0"
