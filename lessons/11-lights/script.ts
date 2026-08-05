@@ -138,10 +138,11 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 /**
  * Animate
  */
-const clock = new THREE.Clock()
+const timer = new THREE.Timer() // Clock deprecated in newer three.js, replaced by Timer
 
 const tick = () => {
-  const elapsedTime = clock.getElapsedTime()
+  timer.update()
+  const elapsedTime = timer.getElapsed()
 
   // Update objects
   sphere.rotation.y = 0.1 * elapsedTime

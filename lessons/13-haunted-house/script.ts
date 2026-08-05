@@ -247,7 +247,7 @@ renderer.setClearColor('#262837')
  * Shadows
  */
 renderer.shadowMap.enabled = true
-renderer.shadowMap.type = THREE.PCFSoftShadowMap
+renderer.shadowMap.type = THREE.VSMShadowMap // PCFSoftShadowMap deprecated in newer three.js (silently falls back to PCFShadowMap), VSMShadowMap is the soft-shadow replacement
 
 moonLight.castShadow = true
 doorLight.castShadow = true
@@ -283,10 +283,11 @@ ghost3.shadow.camera.far = 7
 /**
  * Animate
  */
-const clock = new THREE.Clock()
+const timer = new THREE.Timer() // Clock deprecated in newer three.js, replaced by Timer
 
 const tick = () => {
-  const elapsedTime = clock.getElapsedTime()
+  timer.update()
+  const elapsedTime = timer.getElapsed()
 
   // Update ghosts
   const ghost1Angle = elapsedTime * .5;

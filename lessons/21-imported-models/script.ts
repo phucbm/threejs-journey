@@ -154,19 +154,20 @@ const renderer = new THREE.WebGLRenderer({
     canvas: canvas
 })
 renderer.shadowMap.enabled = true
-renderer.shadowMap.type = THREE.PCFSoftShadowMap
+renderer.shadowMap.type = THREE.VSMShadowMap // PCFSoftShadowMap deprecated in newer three.js (silently falls back to PCFShadowMap), VSMShadowMap is the soft-shadow replacement
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 /**
  * Animate
  */
-const clock = new THREE.Clock()
+const timer = new THREE.Timer() // Clock deprecated in newer three.js, replaced by Timer
 let previousTime = 0
 
 const tick = () =>
 {
-    const elapsedTime = clock.getElapsedTime()
+    timer.update()
+    const elapsedTime = timer.getElapsed()
     const deltaTime = elapsedTime - previousTime
     previousTime = elapsedTime
 
