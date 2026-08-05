@@ -2,6 +2,9 @@ import * as THREE from 'three';
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+// FontLoader/TextGeometry moved out of the THREE namespace into examples/jsm in newer three.js
+import {FontLoader} from "three/examples/jsm/loaders/FontLoader";
+import {TextGeometry} from "three/examples/jsm/geometries/TextGeometry";
 
 const canvas = document.querySelector('canvas.webgl') as HTMLCanvasElement;
 
@@ -304,7 +307,7 @@ scene.add(group, groupText, groupDescription);
 /**
  * Texts
  */
-const fontLoader = new THREE.FontLoader();
+const fontLoader = new FontLoader();
 fontLoader.load(`${import.meta.env.BASE_URL}mineblocks/fonts/dot-gothic-16-reg.json`, (font) => {
   const textMaterial = new THREE.MeshMatcapMaterial({matcap: matcapTexture});
   const descriptionMaterial = new THREE.MeshMatcapMaterial({matcap: matcapTexture});
@@ -313,7 +316,7 @@ fontLoader.load(`${import.meta.env.BASE_URL}mineblocks/fonts/dot-gothic-16-reg.j
     const blockName = typeof blockTextures[i].pretty !== "undefined" ? blockTextures[i].pretty : blockTextures[i].name;
 
     // Create text "めっちゃ凄い"
-    const textGeometry = new THREE.TextGeometry(`${blockName}`, {
+    const textGeometry = new TextGeometry(`${blockName}`, {
       font: font,
       size: .12,
       height: .05,
@@ -335,7 +338,7 @@ fontLoader.load(`${import.meta.env.BASE_URL}mineblocks/fonts/dot-gothic-16-reg.j
     const blockDescription = blockTextures[i].description;
 
     if(typeof blockDescription !== "undefined"){
-      const descriptionGeometry = new THREE.TextGeometry(blockDescription, {
+      const descriptionGeometry = new TextGeometry(blockDescription, {
         font: font,
         size: window.innerWidth > 768 ? .02 : .014,
         height: .002,
