@@ -173,10 +173,11 @@ renderer.shadowMap.enabled = false
 /**
  * Animate
  */
-const clock = new THREE.Clock()
+const timer = new THREE.Timer() // Clock deprecated in newer three.js, replaced by Timer
 
 const tick = () => {
-  const elapsedTime = clock.getElapsedTime()
+  timer.update()
+  const elapsedTime = timer.getElapsed()
 
   // Update the sphere
   sphere.position.x = Math.cos(elapsedTime) * 1.5
