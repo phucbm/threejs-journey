@@ -1,5 +1,8 @@
 import * as THREE from 'three';
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+// FontLoader/TextGeometry moved out of the THREE namespace into examples/jsm in newer three.js
+import {FontLoader} from "three/examples/jsm/loaders/FontLoader";
+import {TextGeometry} from "three/examples/jsm/geometries/TextGeometry";
 
 const canvas = document.querySelector('canvas.webgl') as HTMLCanvasElement;
 
@@ -25,12 +28,12 @@ const matcapTexture = textureLoader.load(`${import.meta.env.BASE_URL}textures/ma
 /**
  * Fonts
  */
-const fontLoader = new THREE.FontLoader();
+const fontLoader = new FontLoader();
 fontLoader.load(
     `${import.meta.env.BASE_URL}fonts/pirata-one-regular.json`,
     (font) => {
       //console.log('font loaded')
-      const textGeometry = new THREE.TextGeometry(
+      const textGeometry = new TextGeometry(
           'Hello Simon', {
             font: font,
             size: .5,
@@ -60,7 +63,7 @@ fontLoader.load(
 
       //console.time('donuts');
 
-      const donutGeometry = new THREE.TorusBufferGeometry(.3, .2, 20, 45);
+      const donutGeometry = new THREE.TorusGeometry(.3, .2, 20, 45); // TorusBufferGeometry removed in newer three.js, renamed to TorusGeometry
 
       for(let i = 0; i < 100; i++){
         const donut = new THREE.Mesh(donutGeometry, material);

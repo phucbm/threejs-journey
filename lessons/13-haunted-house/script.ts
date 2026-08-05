@@ -61,7 +61,7 @@ scene.add(house)
 
 // Walls
 const walls = new THREE.Mesh(
-    new THREE.BoxBufferGeometry(4, 2.5, 4),
+    new THREE.BoxGeometry(4, 2.5, 4), // BoxBufferGeometry removed in newer three.js, renamed to BoxGeometry
     new THREE.MeshStandardMaterial({
       map: bricksColorTexture,
       aoMap: bricksAmbientOcclusionTexture,
@@ -76,7 +76,7 @@ house.add(walls)
 
 // Roof
 const roof = new THREE.Mesh(
-    new THREE.ConeBufferGeometry(3.5, 1, 4),
+    new THREE.ConeGeometry(3.5, 1, 4), // ConeBufferGeometry removed in newer three.js, renamed to ConeGeometry
     new THREE.MeshStandardMaterial({color: '#b35f45'})
 )
 roof.position.y = 2.5 + 1 / 2;
@@ -85,7 +85,7 @@ house.add(roof)
 
 // Door
 const door = new THREE.Mesh(
-    new THREE.PlaneBufferGeometry(2.2, 2.2, 100, 100),
+    new THREE.PlaneGeometry(2.2, 2.2, 100, 100), // PlaneBufferGeometry removed in newer three.js, renamed to PlaneGeometry
     new THREE.MeshStandardMaterial({
       map: doorColorTexture,
       transparent: true,
@@ -105,7 +105,7 @@ door.position.y = 1
 house.add(door)
 
 // Bushes
-const bushGeometry = new THREE.SphereBufferGeometry(1, 16, 16)
+const bushGeometry = new THREE.SphereGeometry(1, 16, 16) // SphereBufferGeometry removed in newer three.js, renamed to SphereGeometry
 const bushMaterial = new THREE.MeshStandardMaterial({color: '#89c854'})
 
 const bush1 = new THREE.Mesh(bushGeometry, bushMaterial);
@@ -129,7 +129,7 @@ house.add(bush1, bush2, bush3, bush4)
 // Graves
 const graves = new THREE.Group();
 scene.add(graves);
-const graveGeometry = new THREE.BoxBufferGeometry(.6, .8, .2)
+const graveGeometry = new THREE.BoxGeometry(.6, .8, .2) // BoxBufferGeometry removed in newer three.js, renamed to BoxGeometry
 const graveMaterial = new THREE.MeshStandardMaterial({color: '#b2b6b1'})
 
 for(let i = 0; i < 50; i++){

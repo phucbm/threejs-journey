@@ -236,7 +236,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
  */
 const objectsToUpdate = [];
 // sphere
-const sphereGeometry = new THREE.SphereBufferGeometry(1, 20, 20);
+const sphereGeometry = new THREE.SphereGeometry(1, 20, 20); // SphereBufferGeometry removed in newer three.js, renamed to SphereGeometry
 const sphereMaterial = new THREE.MeshStandardMaterial({
     metalness: .3,
     roughness: .4,
@@ -268,7 +268,7 @@ const createSphere = (radius, position) => {
 createSphere(.5, {x: 0, y: 3, z: 0});
 
 // box
-const boxGeometry = new THREE.BoxBufferGeometry(1, 1, 1);
+const boxGeometry = new THREE.BoxGeometry(1, 1, 1); // BoxBufferGeometry removed in newer three.js, renamed to BoxGeometry
 const boxMaterial = new THREE.MeshStandardMaterial({
     metalness: .3,
     roughness: .4,

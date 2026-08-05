@@ -113,7 +113,7 @@ plane.receiveShadow = true
 scene.add(sphere, plane)
 
 const sphereShadow = new THREE.Mesh(
-    new THREE.PlaneBufferGeometry(1.5, 1.5),
+    new THREE.PlaneGeometry(1.5, 1.5), // PlaneBufferGeometry removed in newer three.js, renamed to PlaneGeometry
     new THREE.MeshBasicMaterial({
       color: '#000',
       transparent: true,
