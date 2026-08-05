@@ -95,6 +95,10 @@ export const lessons: Lesson[] = [
         description: 'Raycasting from the mouse — hover and click detection on multiple objects, plus intersecting an imported glTF model.',
     },
     {
+        slug: '23-custom-models-with-blender', number: '23', title: 'Custom models with Blender',
+        description: 'Loading a custom glTF model exported from Blender, with Draco compression support.',
+    },
+    {
         slug: 'mineblocks', title: 'Infinite Minecraft Blocks',
         description: 'A scroll-driven infinite grid of Minecraft-style blocks built with GSAP ScrollTrigger and Three.js text geometry.',
     },
