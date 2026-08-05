@@ -119,12 +119,13 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 /**
  * Animate
  */
-const clock = new THREE.Clock()
+const timer = new THREE.Timer() // Clock deprecated in newer three.js, replaced by Timer
 
 let currentIntersect = null;
 
 const tick = () => {
-  const elapsedTime = clock.getElapsedTime()
+  timer.update()
+  const elapsedTime = timer.getElapsed()
 
   object1.position.y = Math.sin(elapsedTime * .3) * 1.5
   object2.position.y = Math.sin(elapsedTime * .8) * 1.5
