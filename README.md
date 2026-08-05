@@ -159,6 +159,19 @@ world.allowSleep = true;
 - GLTF Loader
 - DRACO Loader: Web Assembly available
 
+### 22. Raycaster and mouse events
+```js
+// Test intersect with model
+if (duckModel) {
+    const modelIntersects = raycaster.intersectObject(duckModel);
+    if (modelIntersects.length > 0) {
+        duckModel.scale.set(1.2, 1.2, 1.2);
+    } else {
+        duckModel.scale.set(1, 1, 1);
+    }
+}
+```
+
 ---
 
 ## Playground

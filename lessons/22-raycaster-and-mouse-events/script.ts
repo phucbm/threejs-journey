@@ -109,11 +109,15 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
  * Models
  */
 const gltfLoader = new GLTFLoader()
+let duckModel: THREE.Object3D;
 gltfLoader.load(
     './models/Duck/glTF-Binary/Duck.glb',
     (gltf) => {
         gltf.scene.position.y = -1.2;
         scene.add(gltf.scene)
+
+        // Save the model
+        duckModel = gltf.scene;
     }
 )
 
@@ -160,6 +164,16 @@ const tick = () =>
     for (const intersect of intersects) {
         //@ts-ignore
         intersect.object.material.color.set('#0000ff');
+    }
+
+    // Test intersect with model
+    if (duckModel) {
+        const modelIntersects = raycaster.intersectObject(duckModel);
+        if (modelIntersects.length > 0) {
+            duckModel.scale.set(1.2, 1.2, 1.2);
+        } else {
+            duckModel.scale.set(1, 1, 1);
+        }
     }
 
     // Update controls
