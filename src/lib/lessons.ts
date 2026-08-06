@@ -99,6 +99,10 @@ export const lessons: Lesson[] = [
         description: 'Loading a custom glTF model exported from Blender, with Draco compression support.',
     },
     {
+        slug: '24-environment-map', number: '24', title: 'Environment map',
+        description: 'Lighting and reflecting a scene with environment maps — cube maps, equirectangular HDRs, and generated skyboxes.',
+    },
+    {
         slug: 'mineblocks', title: 'Infinite Minecraft Blocks',
         description: 'A scroll-driven infinite grid of Minecraft-style blocks built with GSAP ScrollTrigger and Three.js text geometry.',
     },
