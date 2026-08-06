@@ -172,6 +172,14 @@ if (duckModel) {
 }
 ```
 
+### 23. Models with Blender
+Export config for glTF Binary (.glb):
+- [x] Transform: +Y Up
+- [x] Mesh: Apply Modifiers
+- [x] Mesh: Normals
+- [x] Draco Compression
+
+
 ---
 
 ## Playground
