@@ -181,6 +181,8 @@ Export config for glTF Binary (.glb):
 
 ### 24. Environment map
 - https://polyhaven.com/
+- LDR
+- HDR Loader
 
 ---
 
