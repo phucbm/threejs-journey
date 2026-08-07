@@ -130,6 +130,7 @@ const tick = () =>
 
     if(mixer)
     {
+        // @ts-ignore
         mixer.update(deltaTime)
     }
 

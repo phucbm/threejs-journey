@@ -179,6 +179,8 @@ Export config for glTF Binary (.glb):
 - [x] Mesh: Normals
 - [x] Draco Compression
 
+### 24. Environment map
+- https://polyhaven.com/
 
 ---
 
