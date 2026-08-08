@@ -3,6 +3,7 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js'
 import GUI from 'lil-gui'
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader.js";
 import {HDRLoader} from "three/examples/jsm/loaders/HDRLoader.js";
+import {EXRLoader} from "three/examples/jsm/loaders/EXRLoader.js";
 
 /**
  * Loaders
@@ -10,6 +11,7 @@ import {HDRLoader} from "three/examples/jsm/loaders/HDRLoader.js";
 const gltfLoader = new GLTFLoader()
 const cubeTextureLoader = new THREE.CubeTextureLoader()
 const hdrLoader = new HDRLoader()
+const exrLoader = new EXRLoader()
 
 /**
  * Base
@@ -51,14 +53,21 @@ gui.add(scene.environmentRotation, 'y').min(0).max(Math.PI * 2).step(.001).name(
 // scene.environment = environmentMap
 
 // HDR Loader
-const environmentMap = hdrLoader.load('./environmentMaps/blender-2k-2.hdr',
-    (environmentMap) => {
-        environmentMap.mapping = THREE.EquirectangularReflectionMapping
+// const environmentMap = hdrLoader.load('./environmentMaps/blender-2k-studio.hdr',
+//     (environmentMap) => {
+//         environmentMap.mapping = THREE.EquirectangularReflectionMapping
+//
+//         scene.background = environmentMap
+//         scene.environment = environmentMap
+//     }
+// );
 
-        scene.background = environmentMap
-        scene.environment = environmentMap
-    }
-);
+// HDR (EXR) equirectangular
+const environmentMap = exrLoader.load('./environmentMaps/nvidiaCanvas-4k.exr', (environmentMap) => {
+    environmentMap.mapping = THREE.EquirectangularReflectionMapping
+    scene.background = environmentMap
+    scene.environment = environmentMap
+})
 
 /**
  * Torus Knot
