@@ -183,6 +183,14 @@ Export config for glTF Binary (.glb):
 - https://polyhaven.com/
 - LDR
 - HDR Loader
+- Blender: 
+  - Render Engine: Cycle 
+  - Max Samples: 256
+  - World > Color: #000
+  - Output Properties: Resolution 2048x1024 (considered as good practice to have power of 2)
+  - Camera: Type: Panoramic; Panorama Type: Equirectangular
+  - Light: Area Light; Power: 1000; Object Properties: Visibility > [x] Camera (visible to the camera);
+  - F12 to render > Save as Radiance HDR
 
 ---
 

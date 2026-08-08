@@ -51,7 +51,7 @@ gui.add(scene.environmentRotation, 'y').min(0).max(Math.PI * 2).step(.001).name(
 // scene.environment = environmentMap
 
 // HDR Loader
-const environmentMap = hdrLoader.load('./environmentMaps/0/2k.hdr',
+const environmentMap = hdrLoader.load('./environmentMaps/blender-2k.hdr',
     (environmentMap) => {
         environmentMap.mapping = THREE.EquirectangularReflectionMapping
 
